@@ -13,39 +13,35 @@ let score = 0;
 let pipeScored = false;
 let goombaScored = false;
 
-// Função para trocar o fundo conforme o score (agora com 10 imagens)
+// Função para trocar o fundo conforme o score (7 imagens online)
 function updateBackground() {
     const gameEl = document.querySelector('.game');
     let newBackground;
 
     if (score < 40) {
-        newBackground = "url('./img/A.JPG')";
+        newBackground = "url('https://images.unsplash.com/photo-1558981359-219d6364c9a0?auto=format&fit=crop&w=1600&q=80')"; // Mario colorido
     } else if (score >= 40 && score < 80) {
-        newBackground = "url('./img/B.JPG')";
+        newBackground = "url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1600&q=80')"; // Céu estrelado
     } else if (score >= 80 && score < 120) {
-        newBackground = "url('./img/C.PNG')";
+        newBackground = "url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1600&q=80')"; // Nebulosa
     } else if (score >= 120 && score < 160) {
-        newBackground = "url('./img/D.JPG')";
+        newBackground = "url('https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1600&q=80')"; // Espaço azul
     } else if (score >= 160 && score < 200) {
-        newBackground = "url('./img/E.JPG')";
+        newBackground = "url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1600&q=80')"; // Galáxia rosa
     } else if (score >= 200 && score < 240) {
-        newBackground = "url('./img/F.JPG')";
-    } else if (score >= 240 && score < 280) {
-        newBackground = "url('./img/G.JPG')";
-    } else if (score >= 280 && score < 320) {
-        newBackground = "url('./img/H.JPG')";
-    } else if (score >= 320 && score < 360) {
-        newBackground = "url('./img/I.JPG')";
-    } else if (score >= 360) {
-        newBackground = "url('./img/J.JPG')";
+        newBackground = "url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1600&q=80')"; // Espaço profundo
+    } else if (score >= 240) {
+        newBackground = "url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80')"; // Universo dourado
     }
 
     if (gameEl.style.backgroundImage !== newBackground) {
         gameEl.style.backgroundImage = newBackground;
+        gameEl.style.backgroundSize = 'cover';
+        gameEl.style.backgroundPosition = 'center';
     }
 }
 
-// Função para iniciar o jogo
+// Inicia o jogo
 const startGame = () => {
     pipe.classList.add('pipe-animation');
     goomba.classList.add('goomba-animation');
@@ -67,7 +63,7 @@ const startGame = () => {
     loop();
 };
 
-// Função para reiniciar o jogo
+// Reinicia o jogo
 const restartGame = () => {
     gameover.style.display = 'none';
     pipe.style.left = 'initial';
@@ -97,7 +93,7 @@ const restartGame = () => {
     loop();
 };
 
-// Função de pular
+// Faz o Mario pular
 const jump = () => {
     if (!mario.classList.contains('jump')) {
         mario.classList.add('jump');
@@ -130,7 +126,7 @@ const loop = () => {
             score += 20;
             scoreEl.textContent = `Score: ${score}`;
             pipeScored = true;
-            updateBackground(); // troca de fundo
+            updateBackground();
         }
 
         // Pontuação: Mario passou do goomba
@@ -138,17 +134,17 @@ const loop = () => {
             score += 20;
             scoreEl.textContent = `Score: ${score}`;
             goombaScored = true;
-            updateBackground(); // troca de fundo
+            updateBackground();
         }
 
-        // Reset flags quando obstáculos voltam
+        // Reset flags
         if (pipePosition > window.innerWidth) pipeScored = false;
         if (goombaPosition > window.innerWidth) goombaScored = false;
 
     }, 10);
 };
 
-// Função de game over
+// Game Over
 const gameOver = () => {
     pipe.classList.remove('pipe-animation');
     goomba.classList.remove('goomba-animation');
@@ -168,16 +164,14 @@ const gameOver = () => {
     }, 7000);
 };
 
-// Controles teclado e touch
+// Controles
 document.addEventListener('keydown', (e) => {
     if (e.code === 'Space') jump();
     if (e.code === 'Enter') startGame();
 });
-
-document.addEventListener('touchstart', () => {
-    jump();
-});
+document.addEventListener('touchstart', () => jump());
 
 // Botões iniciar e reiniciar
 start.addEventListener('click', startGame);
 document.querySelector('.game-over button').addEventListener('click', restartGame);
+
