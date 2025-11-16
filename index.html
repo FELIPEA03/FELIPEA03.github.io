@@ -1,29 +1,546 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!doctype html>
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="styles.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jogo do Mario</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Mario NES - Sidescroller</title>
+<style>
+  /* ---------- Reset ---------- */
+  * { box-sizing: border-box; margin:0; padding:0; }
+  html,body { height:100%; background:#76c1ff; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+
+  /* ---------- Game area ---------- */
+  .stage {
+    width:100%;
+    max-width:1100px;
+    height:600px;
+    margin:24px auto;
+    position:relative;
+    overflow:hidden;
+    border:6px solid #123;
+    background: linear-gradient(#76c1ff 0%, #76c1ff 60%, #8ed96d 60%, #8ed96d 100%);
+    image-rendering: pixelated; /* pixel look */
+  }
+
+  /* ---------- Parallax layers (simulated) ---------- */
+  .layer {
+    position:absolute;
+    left:0; right:0;
+    top:0;
+    bottom:0;
+    pointer-events:none;
+    transform:translateZ(0);
+  }
+
+  .layer .clouds {
+    position:absolute;
+    top:20px;
+    left:0;
+    right:0;
+    height:120px;
+    background-image:
+      radial-gradient(circle at 10% 50%, rgba(255,255,255,0.95) 0 12%, rgba(255,255,255,0) 13%),
+      radial-gradient(circle at 30% 60%, rgba(255,255,255,0.95) 0 12%, rgba(255,255,255,0) 13%),
+      radial-gradient(circle at 70% 40%, rgba(255,255,255,0.9) 0 12%, rgba(255,255,255,0) 13%),
+      radial-gradient(circle at 85% 55%, rgba(255,255,255,0.9) 0 12%, rgba(255,255,255,0) 13%);
+    background-repeat: repeat-x;
+    background-size: 400px 120px;
+    opacity:0.95;
+    filter:drop-shadow(0 2px rgba(0,0,0,0.05));
+  }
+
+  .layer .mountains {
+    position:absolute;
+    bottom:120px;
+    left:0;
+    right:0;
+    height:160px;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0.05), rgba(0,0,0,0.02)),
+      repeating-linear-gradient(-45deg, #4b7b4b 0 60px, #5fa15f 60px 120px);
+    opacity:0.9;
+    transform-origin:center;
+  }
+
+  /* ground (foreground) */
+  .ground {
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    height:120px;
+    background:
+      linear-gradient(#6aa84f, #5b8f44);
+    border-top:6px solid #2e5b2f;
+    box-shadow: inset 0 6px rgba(255,255,255,0.03);
+  }
+
+  /* tile strip to simulate scrolling blocks */
+  .ground .tiles {
+    position:absolute;
+    height:100%;
+    width:400%;
+    left:0;
+    top:0;
+    background-image: linear-gradient(90deg, #6aa84f 0 40px, transparent 40px 80px);
+    background-size: 80px 100%;
+  }
+
+  /* ---------- HUD ---------- */
+  .hud {
+    position:absolute;
+    left:12px;
+    top:12px;
+    z-index:80;
+    color:#fff;
+    text-shadow: 0 2px 0 #0008;
+    font-weight:700;
+  }
+
+  .hud .score { font-size:18px; margin-bottom:6px; }
+  .hud .instructions { font-size:12px; opacity:0.9; }
+
+  /* ---------- Mario (pixel style using many small squares) ---------- */
+  .mario {
+    position:absolute;
+    bottom:120px; /* initial on ground */
+    left:120px; /* screen "focus" position */
+    width:32px;
+    height:48px;
+    z-index:60;
+    image-rendering: pixelated;
+    transform-origin: center bottom;
+    will-change: transform, left, bottom;
+    transition: transform 80ms linear;
+    display:grid;
+    grid-template-columns: repeat(8, 4px);
+    grid-template-rows: repeat(12, 4px);
+    gap:0;
+    filter: drop-shadow(0 2px 0 rgba(0,0,0,0.3));
+  }
+
+  /* Mario pixels (use inline grid items via pseudo-element) */
+  /* We'll draw Mario using a background-image with SVG embedded as data URI (pixel art) */
+  .mario::before {
+    content: "";
+    display:block;
+    width:100%;
+    height:100%;
+    background-image: url('data:image/svg+xml;utf8,\
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="48" shape-rendering="crispEdges">\
+      <!-- NES-style Mario (standing) - palette: hat red, overalls blue, skin, brown shoes -->\
+      <!-- row1 --> <rect x="8" y="0" width="16" height="4" fill="%23b21b1b"/>\
+      <!-- row2 --> <rect x="6" y="4" width="20" height="4" fill="%23b21b1b"/>\
+      <!-- row3 hat to face --> <rect x="4" y="8" width="8" height="4" fill="%23b21b1b"/> <rect x="20" y="8" width="8" height="4" fill="%23b21b1b"/>\
+      <!-- face --> <rect x="12" y="8" width="8" height="4" fill="%23f1c27d"/>\
+      <!-- body --> <rect x="8" y="12" width="16" height="8" fill="%230a59a6"/>\
+      <!-- arms --> <rect x="4" y="12" width="4" height="8" fill="%23f1c27d"/> <rect x="24" y="12" width="4" height="8" fill="%23f1c27d"/>\
+      <!-- overalls strap --> <rect x="10" y="12" width="4" height="4" fill="%23b21b1b"/> <rect x="18" y="12" width="4" height="4" fill="%23b21b1b"/> \
+      <!-- legs --> <rect x="10" y="20" width="6" height="8" fill="%230a59a6"/><rect x="16" y="20" width="6" height="8" fill="%230a59a6"/>\
+      <!-- shoes --> <rect x="10" y="28" width="5" height="4" fill="%2373542f"/><rect x="17" y="28" width="5" height="4" fill="%2373542f"/>\
+      </svg>');
+    background-size: cover;
+  }
+
+  /* lean forward when moving fast */
+  .mario.running { transform: translateY(0) scale(1.02) translateX(0); }
+
+  /* small scale when jumping */
+  .mario.jumping { transform: translateY(-6px) scale(1.02); }
+
+  /* ---------- Entities: pipes and goombas ---------- */
+  .entity {
+    position:absolute;
+    bottom:120px;
+    width:48px;
+    height:48px;
+    z-index:50;
+    image-rendering: pixelated;
+  }
+
+  .pipe {
+    width:56px;
+    height:80px;
+    bottom:120px;
+    background-image: url('data:image/svg+xml;utf8,\
+      <svg xmlns="http://www.w3.org/2000/svg" width="56" height="80" shape-rendering="crispEdges">\
+      <rect x=0 y=40 width=56 height=40 fill="%231e8b2b"/>\
+      <rect x=6 y=10 width=44 height=34 fill="%230f6620"/>\
+      <rect x=0 y=0 width=56 height=10 fill="%231e8b2b"/>\
+      </svg>');
+    background-size: cover;
+  }
+
+  .goomba {
+    width:36px;
+    height:36px;
+    bottom:120px;
+    background-image: url('data:image/svg+xml;utf8,\
+      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" shape-rendering="crispEdges">\
+      <rect x=0 y=12 width=36 height=14 fill="%23b36a3a"/>\
+      <rect x=6 y=4 width=24 height=10 fill="%23422413"/>\
+      <rect x=10 y=20 width=4 height=4 fill="%23000000\"/>\
+      </svg>');
+    background-size: cover;
+  }
+
+  /* small shadow for entities */
+  .entity::after {
+    content:"";
+    position:absolute;
+    left:6px; right:6px;
+    bottom:-6px;
+    height:8px;
+    border-radius:50%;
+    background: rgba(0,0,0,0.25);
+    filter: blur(3px);
+    z-index:-1;
+  }
+
+  /* ---------- Transitions & gameover overlay ---------- */
+  .overlay {
+    position:absolute;
+    left:0; right:0; top:0; bottom:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.25));
+    z-index:90;
+    pointer-events:none;
+  }
+
+  .panel {
+    min-width:320px;
+    background: rgba(0,0,0,0.6);
+    color:#fff;
+    border:4px solid #fff3;
+    padding:18px;
+    text-align:center;
+    pointer-events:auto;
+    display:none;
+    border-radius:8px;
+  }
+
+  .panel button {
+    margin-top:12px;
+    padding:10px 14px;
+    font-weight:700;
+    border:none;
+    background:#ffcc00;
+    cursor:pointer;
+  }
+
+  /* responsive */
+  @media (max-width:760px){
+    .stage { height:520px; }
+    .mario { left:90px; width:28px; height:42px; }
+  }
+</style>
 </head>
 <body>
 
-    <div class="game">
-        <img class="mario" src="img/mario.gif" alt="Mario">
-        <img class="pipe" src="img/pipe.png" alt="Cano">
-        <img class="goomba" src="img/goomba.png" alt="Goomba">
-        <img class="clouds" src="img/clouds.png" alt="Nuvem">
+<div class="stage" id="stage" tabindex="0">
+  <div class="layer" id="bg-sky">
+    <div class="clouds" id="clouds" style=""></div>
+    <div class="mountains" id="mountains"></div>
+  </div>
 
-        <div class="score">Score: 0</div>
-        <button class="start" onclick="startGame()">Iniciar</button>
+  <div class="ground" id="ground">
+    <div class="tiles" id="tiles"></div>
+  </div>
+
+  <div class="hud">
+    <div class="score" id="score">Score: 0</div>
+    <div class="instructions">← → mover • Espaço pular • Enter iniciar</div>
+  </div>
+
+  <div class="mario" id="mario" aria-hidden="true"></div>
+
+  <!-- container for entities -->
+  <div id="entities"></div>
+
+  <div class="overlay">
+    <div class="panel" id="panel">
+      <h2 id="panel-title">GAME OVER</h2>
+      <div id="panel-score">Score final: 0</div>
+      <button id="btn-restart">Reiniciar</button>
     </div>
+  </div>
+</div>
 
-    <div class="game-over">
-        <h1>Game Over :(</h1>
-        <button onclick="restartGame()">Reiniciar</button>
-    </div>
+<script>
+/* ---------- Config ---------- */
+const stage = document.getElementById('stage');
+const mario = document.getElementById('mario');
+const entitiesLayer = document.getElementById('entities');
+const scoreEl = document.getElementById('score');
+const panel = document.getElementById('panel');
+const panelScore = document.getElementById('panel-score');
+const btnRestart = document.getElementById('btn-restart');
 
-    <script src="script.js"></script>
+let running = false;
+let lastTime = 0;
+let spawnTimer = 0;
+let spawnInterval = 1600; // ms between spawns
+let entities = [];
+let score = 0;
+
+/* Mario physics */
+const phys = {
+  x: 120,     // fixed screen x (we keep mario near center)
+  y: 0,       // vertical offset above ground
+  vy: 0,      // vertical velocity
+  width: 32,
+  height: 48,
+  grounded: true,
+  speed: 180, // speed in px/s (used for world shift)
+  jumpPower: 420,
+  gravity: 1300
+};
+
+mario.style.left = phys.x + 'px';
+
+/* Parallax layers speeds */
+const parallax = {
+  cloudsX: 0,
+  mountainsX: 0,
+  tilesX: 0
+};
+
+/* Start focus for keyboard */
+stage.focus();
+
+/* ---------- helpers ---------- */
+function rand(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
+function now(){ return performance.now(); }
+
+/* ---------- game control ---------- */
+function startGame(){
+  if (running) return;
+  running = true;
+  lastTime = now();
+  spawnTimer = 0;
+  entities = [];
+  entitiesLayer.innerHTML = '';
+  score = 0;
+  updateScore();
+  panel.style.display = 'none';
+  requestAnimationFrame(loop);
+}
+
+function gameOver(){
+  running = false;
+  panelScore.textContent = 'Score final: ' + score;
+  panel.style.display = 'block';
+}
+
+/* ---------- entity factory ---------- */
+function spawnEntity(type){
+  const stageW = stage.clientWidth;
+  if (type === 'pipe'){
+    const el = document.createElement('div');
+    el.className = 'entity pipe';
+    el.style.right = '-120px';
+    el.dataset.type = 'pipe';
+    stage.appendChild(el);
+    entities.push({
+      el,
+      type:'pipe',
+      x: stageW + 80,
+      y: 0,
+      w: 56,
+      h: 80,
+      vx: -phys.speed // moves left at base speed
+    });
+  } else if (type === 'goomba'){
+    const el = document.createElement('div');
+    el.className = 'entity goomba';
+    el.style.right = '-120px';
+    el.dataset.type = 'goomba';
+    stage.appendChild(el);
+    entities.push({
+      el,
+      type:'goomba',
+      x: stage.clientWidth + 40,
+      y: 0,
+      w: 36,
+      h: 36,
+      vx: -phys.speed * 1.05
+    });
+  }
+}
+
+/* ---------- collision detection ---------- */
+function rectsOverlap(a,b){
+  return !(a.x + a.w < b.x || a.x > b.x + b.w || a.y + a.h < b.y || a.y > b.y + b.h);
+}
+
+/* ---------- update HUD ---------- */
+function updateScore(){
+  scoreEl.textContent = 'Score: ' + score;
+}
+
+/* ---------- main loop ---------- */
+let keys = {};
+document.addEventListener('keydown', e => {
+  if (e.code === 'ArrowRight' || e.key === 'd') keys.right = true;
+  if (e.code === 'ArrowLeft' || e.key === 'a') keys.left = true;
+  if (e.code === 'Space') keys.space = true;
+  if (e.code === 'Enter') startGame();
+});
+document.addEventListener('keyup', e => {
+  if (e.code === 'ArrowRight' || e.key === 'd') keys.right = false;
+  if (e.code === 'ArrowLeft' || e.key === 'a') keys.left = false;
+  if (e.code === 'Space') keys.space = false;
+});
+
+/* touch support: tap to jump, swipe to move */
+let touchStartX = null;
+stage.addEventListener('touchstart', (ev) => {
+  ev.preventDefault();
+  touchStartX = ev.touches[0].clientX;
+  keys.space = true;
+});
+stage.addEventListener('touchend', (ev) => {
+  ev.preventDefault();
+  keys.space = false;
+  touchStartX = null;
+});
+
+/* loop */
+function loop(timestamp){
+  if (!running) return;
+  const dt = Math.min((timestamp - lastTime) / 1000, 0.032); // cap dt
+  lastTime = timestamp;
+
+  // horizontal world shift (we simulate Mario moving forward when pressing right)
+  let worldShift = 0;
+  if (keys.right) {
+    worldShift = phys.speed * dt;
+    mario.classList.add('running');
+  } else {
+    mario.classList.remove('running');
+  }
+
+  // gravity & jump
+  phys.vy += phys.gravity * dt;
+  phys.y += phys.vy * dt;
+  if (phys.y <= 0) {
+    phys.y = 0;
+    phys.vy = 0;
+    phys.grounded = true;
+  } else {
+    phys.grounded = false;
+  }
+
+  if (keys.space && phys.grounded) {
+    phys.vy = -phys.jumpPower;
+    phys.grounded = false;
+    mario.classList.add('jumping');
+    setTimeout(()=> mario.classList.remove('jumping'), 400);
+  }
+
+  // update Mario vertical position (bottom from ground)
+  mario.style.bottom = (120 + phys.y) + 'px';
+
+  // spawn logic
+  spawnTimer += dt * 1000;
+  if (spawnTimer >= spawnInterval) {
+    spawnTimer = 0;
+    // randomize spawn type and spacing
+    const r = Math.random();
+    if (r < 0.45) spawnEntity('goomba');
+    else spawnEntity('pipe');
+
+    // slightly vary next spawn interval with skill curve
+    spawnInterval = Math.max(800, 1600 - Math.floor(score/10)*30 - Math.random()*600);
+  }
+
+  // update entities positions
+  for (let i = entities.length-1; i >= 0; i--) {
+    const en = entities[i];
+    en.x += en.vx * dt + -worldShift; // worldShift influences relative speed
+    // apply simple ground bounce for goomba if desired (skip for NES style)
+    en.el.style.transform = `translateX(${en.x - stage.clientWidth}px)`; // since we attach elements to stage, we can translate
+    // set CSS bottom to keep them on ground
+    en.el.style.bottom = '120px';
+
+    // collision hitbox relative to Mario (Mario's world position is near fixed phys.x)
+    const marioBox = { x: phys.x, y: phys.y, w: phys.width, h: phys.height };
+    const enBox = { x: en.x - en.w, y: 0, w: en.w, h: en.h }; // entities x is stage.clientWidth + offset
+    // check overlap (simplified)
+    if (rectsOverlap(marioBox, enBox)) {
+      // if Mario is descending and his feet hit top of enemy -> stomp
+      if (phys.vy > 50 && (phys.y + phys.height) > (en.h - 8)) {
+        // stomped: remove entity and bounce Mario a bit
+        try {
+          en.el.remove();
+        } catch(e){}
+        entities.splice(i,1);
+        phys.vy = -250;
+        score += 50;
+        updateScore();
+      } else {
+        // hit from side -> game over
+        gameOver();
+      }
+    }
+
+    // score points when entity leaves screen to left
+    if (en.x + en.w < 0) {
+      // give score depending on type
+      if (en.type === 'goomba') score += 10;
+      if (en.type === 'pipe') score += 20;
+      updateScore();
+      // cleanup
+      try { en.el.remove(); } catch(e){}
+      entities.splice(i,1);
+    }
+  }
+
+  // parallax movement (based on worldShift)
+  parallax.cloudsX -= worldShift * 0.2;
+  parallax.mountainsX -= worldShift * 0.45;
+  parallax.tilesX -= worldShift * 1.0;
+
+  document.getElementById('clouds').style.backgroundPosition = parallax.cloudsX + 'px 0px';
+  document.getElementById('mountains').style.transform = `translateX(${parallax.mountainsX}px)`;
+  document.getElementById('tiles').style.left = (parallax.tilesX % stage.clientWidth) + 'px';
+
+  requestAnimationFrame(loop);
+}
+
+/* ---------- restart button ---------- */
+btnRestart.addEventListener('click', () => {
+  // remove existing entities
+  document.querySelectorAll('.entity').forEach(e => e.remove());
+  entities = [];
+  startGame();
+});
+
+/* ---------- focus click to start instructions ---------- */
+stage.addEventListener('click', () => {
+  if (!running) {
+    startGame();
+  }
+});
+
+/* ---------- Accessibility: focus on stage ---------- */
+stage.addEventListener('blur', () => stage.focus());
+
+/* ---------- small tuning on window resize ---------- */
+window.addEventListener('resize', () => {
+  // optional: reposition things if necessary
+});
+
+/* ---------- initial demo spawn to make the stage lively before start ---------- */
+(function warmupDemo(){
+  // spawn a few entities off-screen for visual interest (won't move until start)
+  spawnEntity('pipe');
+  setTimeout(()=> spawnEntity('goomba'), 350);
+})();
+</script>
 </body>
 </html>
+
 
