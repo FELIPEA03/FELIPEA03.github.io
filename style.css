@@ -57,19 +57,6 @@ margin-top:20px;
 
 }
 
-.badges span{
-
-background:#161b22;
-padding:10px 15px;
-border-radius:8px;
-margin:5px;
-display:inline-block;
-border:1px solid #30363d;
-
-}
-
-/* BOTÃO PYTHON */
-
 .skill{
 
 background:#161b22;
@@ -78,8 +65,7 @@ border-radius:8px;
 margin:5px;
 display:inline-block;
 border:1px solid #30363d;
-color:white;
-text-decoration:none;
+cursor:pointer;
 
 }
 
@@ -89,12 +75,13 @@ background:#238636;
 
 }
 
-/* PROJETO */
+/* PROJETO ESCONDIDO */
 
 .projeto{
 
 margin-top:80px;
 text-align:center;
+display:none;
 
 }
 
