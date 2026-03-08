@@ -31,6 +31,7 @@ Gosto de desenvolver aplicativos e projetos focados em mobile e automação.
 
 </div>
 
+
 <!-- SKILLS -->
 
 <div class="skills">
@@ -40,7 +41,7 @@ Gosto de desenvolver aplicativos e projetos focados em mobile e automação.
 <div class="badges">
 
 <span class="skill" onclick="mostrarPython()">Python</span>
-<span class="skill">JavaScript</span>
+<span class="skill" onclick="mostrarJS()">JavaScript</span>
 <span class="skill">React Native</span>
 <span class="skill">HTML</span>
 <span class="skill">CSS</span>
@@ -50,7 +51,8 @@ Gosto de desenvolver aplicativos e projetos focados em mobile e automação.
 
 </div>
 
-<!-- PROJETO PYTHON (ESCONDIDO) -->
+
+<!-- PROJETO PYTHON -->
 
 <section id="python-projeto" class="projeto">
 
@@ -63,8 +65,9 @@ Gosto de desenvolver aplicativos e projetos focados em mobile e automação.
 <p>
 Aplicativo de gerenciamento de tarefas desenvolvido com
 <strong>Python + Kivy</strong>.
-Permite adicionar, concluir e organizar tarefas em uma interface
-adaptada para celular.
+
+O aplicativo permite adicionar, concluir e organizar tarefas
+de forma simples em uma interface adaptada para dispositivos móveis.
 </p>
 
 <div class="video">
@@ -87,21 +90,79 @@ Ver repositório no GitHub
 
 </section>
 
+
+<!-- PROJETO JAVASCRIPT -->
+
+<section id="js-projeto" class="projeto">
+
+<h2>Projeto em JavaScript</h2>
+
+<div class="card-projeto">
+
+<h3>💡 Abajur Interativo</h3>
+
+<p>
+Página de login interativa desenvolvida com 
+<strong>HTML, CSS e JavaScript</strong>.
+
+O projeto possui um abajur que pode ser ligado ou desligado.
+Quando o abajur acende ou apaga, ele também mostra ou esconde
+a área de login da página, criando uma interação visual divertida.
+</p>
+
+<div class="video">
+
+<video controls height="420">
+<source src="video2.mp4" type="video/mp4">
+</video>
+
 </div>
+
+<a class="botao-github"
+href="https://github.com/FELIPEA03/abajur-login"
+target="_blank">
+
+Ver repositório no GitHub
+
+</a>
+
+</div>
+
+</section>
+
+
+</div>
+
 
 <script>
 
 function mostrarPython(){
 
-let projeto = document.getElementById("python-projeto")
+let python = document.getElementById("python-projeto")
 
-if(projeto.style.display === "block"){
+if(python.style.display === "block"){
 
-projeto.style.display = "none"
+python.style.display = "none"
 
 }else{
 
-projeto.style.display = "block"
+python.style.display = "block"
+
+}
+
+}
+
+function mostrarJS(){
+
+let js = document.getElementById("js-projeto")
+
+if(js.style.display === "block"){
+
+js.style.display = "none"
+
+}else{
+
+js.style.display = "block"
 
 }
 
