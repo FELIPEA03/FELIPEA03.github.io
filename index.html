@@ -43,7 +43,7 @@ Gosto de desenvolver aplicativos e projetos focados em mobile e automação.
 <span class="skill" onclick="mostrarPython()">Python</span>
 <span class="skill" onclick="mostrarJS()">JavaScript</span>
 <span class="skill">React Native</span>
-<span class="skill">HTML e CSS </span>
+<span class="skill" onclick="mostrarHTMLCSS()">HTML e CSS</span>
 
 </div>
 
@@ -129,6 +129,46 @@ Ver repositório no GitHub
 </section>
 
 
+<!-- PROJETO HTML E CSS -->
+
+<section id="htmlcss-projeto" class="projeto">
+
+<h2>Projeto em HTML e CSS</h2>
+
+<div class="card-projeto">
+
+<h3>⌚ Loja de Relógios</h3>
+
+<p>
+Site de vendas de relógios responsivo desenvolvido utilizando 
+<strong>HTML e CSS</strong>.
+
+O projeto apresenta um layout moderno e elegante para exibir
+produtos de luxo, com design adaptado para celulares,
+tablets e computadores.
+</p>
+
+<div class="video">
+
+<video controls height="420">
+<source src="video3.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<a class="botao-github"
+href="https://github.com/FELIPEA03/loja-de-relogios"
+target="_blank">
+
+Ver repositório no GitHub
+
+</a>
+
+</div>
+
+</section>
+
+
 </div>
 
 
@@ -139,13 +179,9 @@ function mostrarPython(){
 let python = document.getElementById("python-projeto")
 
 if(python.style.display === "block"){
-
 python.style.display = "none"
-
 }else{
-
 python.style.display = "block"
-
 }
 
 }
@@ -155,13 +191,21 @@ function mostrarJS(){
 let js = document.getElementById("js-projeto")
 
 if(js.style.display === "block"){
-
 js.style.display = "none"
-
 }else{
-
 js.style.display = "block"
+}
 
+}
+
+function mostrarHTMLCSS(){
+
+let htmlcss = document.getElementById("htmlcss-projeto")
+
+if(htmlcss.style.display === "block"){
+htmlcss.style.display = "none"
+}else{
+htmlcss.style.display = "block"
 }
 
 }
