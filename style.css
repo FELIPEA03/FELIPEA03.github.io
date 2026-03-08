@@ -1,66 +1,141 @@
 body{
-    margin:0;
-    font-family:Arial;
-    background:#0d1117;
-    color:white;
+
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#0d1117;
+color:white;
+
 }
 
 .container{
-    width:90%;
-    margin:auto;
-    padding:40px;
+
+width:90%;
+max-width:1000px;
+margin:auto;
+padding:40px;
+
 }
 
+/* PERFIL */
+
 .perfil{
-    text-align:center;
+
+text-align:center;
+margin-bottom:40px;
+
 }
 
 .foto{
-    width:150px;
-    border-radius:50%;
-    border:3px solid #58a6ff;
-}
 
-h1{
-    margin-top:10px;
+width:150px;
+border-radius:50%;
+border:3px solid #58a6ff;
+
 }
 
 .descricao{
-    max-width:600px;
-    margin:auto;
-    margin-top:20px;
-    color:#c9d1d9;
+
+max-width:600px;
+margin:auto;
+margin-top:15px;
+color:#c9d1d9;
+
 }
 
-.redes{
-    margin-top:20px;
-}
-
-.redes a{
-    text-decoration:none;
-    background:#238636;
-    padding:10px 20px;
-    border-radius:6px;
-    color:white;
-    margin:5px;
-    display:inline-block;
-}
+/* SKILLS */
 
 .skills{
-    margin-top:50px;
-    text-align:center;
+
+text-align:center;
+margin-top:40px;
+
+}
+
+.badges{
+
+margin-top:20px;
+
 }
 
 .badges span{
 
-    background:#161b22;
-    padding:10px 15px;
-    border-radius:8px;
-    margin:5px;
-    display:inline-block;
-    border:1px solid #30363d;
+background:#161b22;
+padding:10px 15px;
+border-radius:8px;
+margin:5px;
+display:inline-block;
+border:1px solid #30363d;
 
 }
 
+/* BOTÃO PYTHON */
 
+.skill{
 
+background:#161b22;
+padding:10px 15px;
+border-radius:8px;
+margin:5px;
+display:inline-block;
+border:1px solid #30363d;
+color:white;
+text-decoration:none;
+
+}
+
+.skill:hover{
+
+background:#238636;
+
+}
+
+/* PROJETO */
+
+.projeto{
+
+margin-top:80px;
+text-align:center;
+
+}
+
+.card-projeto{
+
+background:#161b22;
+padding:30px;
+border-radius:10px;
+border:1px solid #30363d;
+max-width:600px;
+margin:auto;
+
+}
+
+.card-projeto p{
+
+color:#c9d1d9;
+
+}
+
+.video{
+
+margin:20px 0;
+
+}
+
+.botao-github{
+
+display:inline-block;
+margin-top:10px;
+background:#238636;
+color:white;
+padding:12px 20px;
+border-radius:6px;
+text-decoration:none;
+font-weight:bold;
+
+}
+
+.botao-github:hover{
+
+background:#2ea043;
+
+}
