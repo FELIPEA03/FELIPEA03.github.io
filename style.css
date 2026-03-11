@@ -171,6 +171,8 @@ margin:20px 0;
 .video video{
 
 width:100%;
+max-width:420px;
+height:auto;
 border-radius:10px;
 
 }
