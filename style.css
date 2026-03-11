@@ -244,3 +244,38 @@ margin:10px;
 }
 
 }
+.carousel{
+
+display:flex;
+align-items:center;
+justify-content:center;
+margin:20px 0;
+
+}
+
+.carousel img{
+
+width:100%;
+max-width:420px;
+border-radius:10px;
+
+}
+
+.seta{
+
+background:#238636;
+border:none;
+color:white;
+font-size:25px;
+padding:10px 15px;
+cursor:pointer;
+border-radius:6px;
+margin:0 10px;
+
+}
+
+.seta:hover{
+
+background:#2ea043;
+
+}
