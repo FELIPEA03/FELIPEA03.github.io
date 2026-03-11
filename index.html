@@ -23,9 +23,7 @@
 
 </nav>
 
-
 <div class="container">
-
 
 <!-- PERFIL -->
 
@@ -49,7 +47,6 @@ Trabalho com Python, JavaScript, HTML, CSS e React Native.
 </section>
 
 
-
 <!-- SKILLS -->
 
 <section id="skills" class="skills">
@@ -61,12 +58,10 @@ Trabalho com Python, JavaScript, HTML, CSS e React Native.
 <a href="#projeto-python" class="skill">Python</a>
 <a href="#projeto-js" class="skill">JavaScript</a>
 <a href="#projeto-htmlcss" class="skill">HTML e CSS</a>
-<a href="#projeto-react" class="skill">React Native</a>
 
 </div>
 
 </section>
-
 
 
 <!-- PROJETOS -->
@@ -86,9 +81,6 @@ Trabalho com Python, JavaScript, HTML, CSS e React Native.
 
 Aplicativo de gerenciamento de tarefas desenvolvido com
 <strong>Python + Kivy</strong>.
-
-O aplicativo permite adicionar, concluir e organizar tarefas
-de forma simples em uma interface adaptada para dispositivos móveis.
 
 </p>
 
@@ -123,17 +115,15 @@ Ver repositório no GitHub
 Página de login interativa desenvolvida com
 <strong>HTML, CSS e JavaScript</strong>.
 
-O projeto possui um abajur que pode ser ligado ou desligado.
-Quando o abajur acende ou apaga, ele também mostra ou esconde
-a área de login da página.
-
 </p>
 
-<div class="video">
+<div class="carousel">
 
-<video controls>
-<source src="video2.mp4" type="video/mp4">
-</video>
+<button class="seta" onclick="trocarImagemJS(-1)">❮</button>
+
+<img id="img-js" src="img1.png">
+
+<button class="seta" onclick="trocarImagemJS(1)">❯</button>
 
 </div>
 
@@ -160,16 +150,15 @@ Ver repositório no GitHub
 Site de vendas de relógios responsivo desenvolvido utilizando
 <strong>HTML e CSS</strong>.
 
-O projeto apresenta um layout moderno e elegante para exibir
-produtos de luxo com design adaptado para celulares, tablets e computadores.
-
 </p>
 
-<div class="video">
+<div class="carousel">
 
-<video controls>
-<source src="video3.mp4" type="video/mp4">
-</video>
+<button class="seta" onclick="trocarImagemHTML(-1)">❮</button>
+
+<img id="img-html" src="img11.png">
+
+<button class="seta" onclick="trocarImagemHTML(1)">❯</button>
 
 </div>
 
@@ -204,8 +193,52 @@ github.com/FELIPEA03
 
 </section>
 
-
 </div>
+
+
+<script>
+
+let imagensJS = ["img1.png","img2.png","img3.png"]
+let indiceJS = 0
+
+function trocarImagemJS(direcao){
+
+indiceJS += direcao
+
+if(indiceJS < 0){
+indiceJS = imagensJS.length - 1
+}
+
+if(indiceJS >= imagensJS.length){
+indiceJS = 0
+}
+
+document.getElementById("img-js").src = imagensJS[indiceJS]
+
+}
+
+
+
+let imagensHTML = ["img11.png","img22.png","img33.png"]
+let indiceHTML = 0
+
+function trocarImagemHTML(direcao){
+
+indiceHTML += direcao
+
+if(indiceHTML < 0){
+indiceHTML = imagensHTML.length - 1
+}
+
+if(indiceHTML >= imagensHTML.length){
+indiceHTML = 0
+}
+
+document.getElementById("img-html").src = imagensHTML[indiceHTML]
+
+}
+
+</script>
 
 </body>
 </html>
