@@ -7,6 +7,40 @@ color:white;
 
 }
 
+
+
+/* MENU */
+
+.menu{
+
+position:sticky;
+top:0;
+background:#161b22;
+padding:15px;
+text-align:center;
+border-bottom:1px solid #30363d;
+
+}
+
+.menu a{
+
+color:white;
+margin:0 15px;
+text-decoration:none;
+font-weight:bold;
+
+}
+
+.menu a:hover{
+
+color:#58a6ff;
+
+}
+
+
+
+/* CONTAINER */
+
 .container{
 
 width:90%;
@@ -16,12 +50,14 @@ padding:40px;
 
 }
 
+
+
 /* PERFIL */
 
 .perfil{
 
 text-align:center;
-margin-bottom:40px;
+margin-bottom:60px;
 
 }
 
@@ -30,6 +66,14 @@ margin-bottom:40px;
 width:150px;
 border-radius:50%;
 border:3px solid #58a6ff;
+transition:0.3s;
+
+}
+
+.foto:hover{
+
+transform:scale(1.05);
+box-shadow:0 0 20px #58a6ff;
 
 }
 
@@ -41,6 +85,8 @@ margin-top:15px;
 color:#c9d1d9;
 
 }
+
+
 
 /* SKILLS */
 
@@ -65,23 +111,25 @@ border-radius:8px;
 margin:5px;
 display:inline-block;
 border:1px solid #30363d;
-cursor:pointer;
+transition:0.3s;
 
 }
 
 .skill:hover{
 
 background:#238636;
+transform:scale(1.05);
 
 }
 
+
+
 /* PROJETOS */
 
-.projeto{
+.titulo-projetos{
 
-margin-top:80px;
 text-align:center;
-display:none;
+margin-top:80px;
 
 }
 
@@ -91,8 +139,16 @@ background:#161b22;
 padding:30px;
 border-radius:10px;
 border:1px solid #30363d;
-max-width:600px;
-margin:auto;
+max-width:650px;
+margin:40px auto;
+transition:0.3s;
+
+}
+
+.card-projeto:hover{
+
+transform:scale(1.02);
+box-shadow:0 0 20px rgba(88,166,255,0.2);
 
 }
 
@@ -102,11 +158,26 @@ color:#c9d1d9;
 
 }
 
+
+
+/* VIDEO */
+
 .video{
 
 margin:20px 0;
 
 }
+
+.video video{
+
+width:100%;
+border-radius:10px;
+
+}
+
+
+
+/* BOTÃO */
 
 .botao-github{
 
@@ -124,5 +195,50 @@ font-weight:bold;
 .botao-github:hover{
 
 background:#2ea043;
+
+}
+
+
+
+/* CONTATO */
+
+.contato{
+
+margin-top:100px;
+text-align:center;
+
+}
+
+.contato a{
+
+color:#58a6ff;
+text-decoration:none;
+
+}
+
+.contato a:hover{
+
+text-decoration:underline;
+
+}
+
+
+
+/* RESPONSIVO */
+
+@media (max-width:600px){
+
+.container{
+
+padding:20px;
+
+}
+
+.menu a{
+
+display:block;
+margin:10px;
+
+}
 
 }
