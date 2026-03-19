@@ -1,71 +1,52 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Felipe Andrade | Desenvolvedor</title>
 
 <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
 
-<nav class="menu">
+<!-- FUNDO ANIMADO -->
+<canvas id="bg"></canvas>
 
+<nav class="menu">
 <a href="#perfil">Sobre</a>
 <a href="#skills">Skills</a>
 <a href="#projetos">Projetos</a>
 <a href="#contato">Contato</a>
-
 </nav>
-
 
 <div class="container">
 
-<!-- PERFIL -->
-
 <section id="perfil" class="perfil">
 
-<img src="foto.jpg" class="foto">
+<img src="foto.jpg" class="foto" alt="Foto de Felipe Andrade">
 
-<h1>Felipe Andrade</h1>
+<h1>Felipe <span>Andrade</span></h1>
 
 <p class="descricao">
-
-Olá! Bem-vindo ao meu portfólio.
-
-Sou apaixonado por tecnologia e programação.
-Gosto de desenvolver aplicativos e projetos focados em mobile e automação.
-
-Trabalho com Python, JavaScript, HTML, CSS e React Native.
-
+Desenvolvedor apaixonado por tecnologia, focado em criação de aplicações modernas, responsivas e interativas.
 </p>
 
 </section>
-
-
-<!-- SKILLS -->
 
 <section id="skills" class="skills">
 
 <h2>Minhas Skills</h2>
 
 <div class="badges">
-
 <a href="#projeto-python" class="skill">Python</a>
 <a href="#projeto-js" class="skill">JavaScript</a>
 <a href="#projeto-htmlcss" class="skill">HTML e CSS</a>
-
 </div>
 
 </section>
-
-
-<!-- PROJETOS -->
 
 <section id="projetos">
 
@@ -73,180 +54,146 @@ Trabalho com Python, JavaScript, HTML, CSS e React Native.
 
 <div class="grid-projetos">
 
-
-<!-- PYTHON -->
-
 <div id="projeto-python" class="card-projeto">
-
 <h3>📱 Gestor de Tarefas</h3>
-
-<p>
-
-Aplicativo de gerenciamento de tarefas desenvolvido com
-<strong>Python + Kivy</strong>.
-
-</p>
+<p>Aplicativo desenvolvido com Python + Kivy.</p>
 
 <div class="video">
-
 <video controls>
 <source src="video_app.mp4" type="video/mp4">
 </video>
-
 </div>
 
-<a class="botao-github"
-href="https://github.com/FELIPEA03/Gerenciador-de-tarefas-apk/tree/main/meu_todo_app"
-target="_blank">
-
-Ver repositório no GitHub
-
+<a class="botao-github" href="https://github.com/FELIPEA03" target="_blank">
+Ver GitHub
 </a>
-
 </div>
-
-
-
-<!-- JAVASCRIPT -->
 
 <div id="projeto-js" class="card-projeto">
-
 <h3>💡 Abajur Interativo</h3>
-
-<p>
-
-Página de login interativa desenvolvida com
-<strong>HTML, CSS e JavaScript</strong>.
-
-</p>
+<p>Interface interativa com JavaScript.</p>
 
 <div class="carousel">
-
 <button class="seta" onclick="trocarImagemJS(-1)">❮</button>
-
-<img id="img-js" src="img1.png">
-
+<img id="img-js" src="img1.png" alt="">
 <button class="seta" onclick="trocarImagemJS(1)">❯</button>
-
 </div>
 
-<a class="botao-github"
-href="https://github.com/FELIPEA03/abajur-login"
-target="_blank">
-
-Ver repositório no GitHub
-
+<a class="botao-github" href="https://github.com/FELIPEA03" target="_blank">
+Ver GitHub
 </a>
-
 </div>
-
-
-
-<!-- HTML CSS -->
 
 <div id="projeto-htmlcss" class="card-projeto">
-
 <h3>⌚ Loja de Relógios</h3>
-
-<p>
-
-Site de vendas de relógios responsivo desenvolvido utilizando
-<strong>HTML e CSS</strong>.
-
-</p>
+<p>Site responsivo com HTML e CSS.</p>
 
 <div class="carousel">
-
 <button class="seta" onclick="trocarImagemHTML(-1)">❮</button>
-
-<img id="img-html" src="img11.png">
-
+<img id="img-html" src="img11.png" alt="">
 <button class="seta" onclick="trocarImagemHTML(1)">❯</button>
-
 </div>
 
-<a class="botao-github"
-href="https://github.com/FELIPEA03/loja-de-relogios"
-target="_blank">
-
-Ver repositório no GitHub
-
+<a class="botao-github" href="https://github.com/FELIPEA03" target="_blank">
+Ver GitHub
 </a>
-
 </div>
-
 
 </div>
 
 </section>
 
-
-
-<!-- CONTATO -->
-
 <section id="contato" class="contato">
-
 <h2>Contato</h2>
-
 <p>📱 WhatsApp: 11 91866-2998</p>
-
 <p>
 💻 GitHub:
 <a href="https://github.com/FELIPEA03" target="_blank">
 github.com/FELIPEA03
 </a>
 </p>
-
 </section>
 
 </div>
 
-
-
 <script>
 
-let imagensJS = ["img1.png","img2.png","img3.png"]
-let indiceJS = 0
-
-function trocarImagemJS(direcao){
-
-indiceJS += direcao
-
-if(indiceJS < 0){
-indiceJS = imagensJS.length - 1
+/* CAROUSEL JS */
+function criarCarousel(imagens, id){
+  let i = 0;
+  return function(d){
+    i += d;
+    if(i < 0) i = imagens.length - 1;
+    if(i >= imagens.length) i = 0;
+    document.getElementById(id).src = imagens[i];
+  }
 }
 
-if(indiceJS >= imagensJS.length){
-indiceJS = 0
+const trocarImagemJS = criarCarousel(["img1.png","img2.png","img3.png"], "img-js");
+const trocarImagemHTML = criarCarousel(["img11.png","img22.png","img33.png"], "img-html");
+
+/* FUNDO ANIMADO */
+const canvas = document.getElementById("bg");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for(let i = 0; i < 80; i++){
+  particles.push({
+    x: Math.random()*canvas.width,
+    y: Math.random()*canvas.height,
+    size: Math.random()*2+1,
+    speedX: Math.random()*1-0.5,
+    speedY: Math.random()*1-0.5
+  });
 }
 
-document.getElementById("img-js").src = imagensJS[indiceJS]
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
 
+  particles.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    ctx.fillStyle="#58a6ff";
+    ctx.fill();
+
+    p.x += p.speedX;
+    p.y += p.speedY;
+
+    if(p.x<0||p.x>canvas.width) p.speedX*=-1;
+    if(p.y<0||p.y>canvas.height) p.speedY*=-1;
+  });
+
+  for(let a=0;a<particles.length;a++){
+    for(let b=a;b<particles.length;b++){
+      let dx=particles[a].x-particles[b].x;
+      let dy=particles[a].y-particles[b].y;
+      let dist=dx*dx+dy*dy;
+
+      if(dist<12000){
+        ctx.beginPath();
+        ctx.strokeStyle="rgba(88,166,255,0.2)";
+        ctx.moveTo(particles[a].x,particles[a].y);
+        ctx.lineTo(particles[b].x,particles[b].y);
+        ctx.stroke();
+      }
+    }
+  }
+
+  requestAnimationFrame(draw);
 }
 
+draw();
 
-
-let imagensHTML = ["img11.png","img22.png","img33.png"]
-let indiceHTML = 0
-
-function trocarImagemHTML(direcao){
-
-indiceHTML += direcao
-
-if(indiceHTML < 0){
-indiceHTML = imagensHTML.length - 1
-}
-
-if(indiceHTML >= imagensHTML.length){
-indiceHTML = 0
-}
-
-document.getElementById("img-html").src = imagensHTML[indiceHTML]
-
-}
+window.addEventListener("resize",()=>{
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
 
 </script>
-
 
 </body>
 </html>
