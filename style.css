@@ -120,12 +120,27 @@ background:#161b22;
 padding:20px;
 border-radius:10px;
 border:1px solid #30363d;
+cursor:pointer;
 transition:0.3s;
 }
 
 .card-projeto:hover{
 transform:translateY(-8px);
 box-shadow:0 0 20px rgba(88,166,255,0.2);
+}
+
+/* CONTEUDO OCULTO */
+.conteudo-projeto{
+max-height:0;
+overflow:hidden;
+opacity:0;
+transition:0.4s;
+margin-top:10px;
+}
+
+.conteudo-projeto.ativo{
+max-height:600px;
+opacity:1;
 }
 
 /* VIDEO */
@@ -139,7 +154,6 @@ margin:20px 0;
 width:100%;
 max-width:300px;
 border-radius:10px;
-box-shadow:0 0 15px rgba(88,166,255,0.2);
 }
 
 /* CAROUSEL */
