@@ -24,19 +24,15 @@
 <div class="container">
 
 <section id="perfil" class="perfil">
-
 <img src="foto.jpg" class="foto">
-
 <h1>Felipe <span>Andrade</span></h1>
 
 <p class="descricao">
 Desenvolvedor apaixonado por tecnologia, focado em criação de aplicações modernas, responsivas e interativas.
 </p>
-
 </section>
 
 <section id="skills" class="skills">
-
 <h2>Minhas Skills</h2>
 
 <div class="badges">
@@ -44,18 +40,15 @@ Desenvolvedor apaixonado por tecnologia, focado em criação de aplicações mod
 <a href="#projeto-js" class="skill">JavaScript</a>
 <a href="#projeto-htmlcss" class="skill">HTML e CSS</a>
 </div>
-
 </section>
 
 <section id="projetos">
-
 <h2 class="titulo-projetos">Projetos</h2>
 
 <div class="grid-projetos">
 
 <!-- PYTHON -->
 <div id="projeto-python" class="card-projeto" onclick="toggleProjeto('python')">
-
 <h3>📁 Gestor de Tarefas</h3>
 <p>Clique para ver detalhes</p>
 
@@ -65,7 +58,7 @@ Desenvolvedor apaixonado por tecnologia, focado em criação de aplicações mod
 
 <div class="video">
 <video controls>
-<source src="video_app.mp4" type="video/mp4">
+<source src="video_app.mp4">
 </video>
 </div>
 
@@ -74,12 +67,10 @@ Ver GitHub
 </a>
 
 </div>
-
 </div>
 
 <!-- JAVASCRIPT -->
 <div id="projeto-js" class="card-projeto" onclick="toggleProjeto('js')">
-
 <h3>📁 Abajur Interativo</h3>
 <p>Clique para ver detalhes</p>
 
@@ -87,10 +78,12 @@ Ver GitHub
 
 <p>Interface interativa com JavaScript.</p>
 
+<div class="carousel-container">
 <div class="carousel">
 <button class="seta" onclick="event.stopPropagation();trocarImagemJS(-1)">❮</button>
 <img id="img-js" src="img1.png">
 <button class="seta" onclick="event.stopPropagation();trocarImagemJS(1)">❯</button>
+</div>
 </div>
 
 <a class="botao-github" href="https://github.com/FELIPEA03" target="_blank">
@@ -98,12 +91,10 @@ Ver GitHub
 </a>
 
 </div>
-
 </div>
 
 <!-- HTML CSS -->
 <div id="projeto-htmlcss" class="card-projeto" onclick="toggleProjeto('html')">
-
 <h3>📁 Loja de Relógios</h3>
 <p>Clique para ver detalhes</p>
 
@@ -111,10 +102,12 @@ Ver GitHub
 
 <p>Site responsivo com HTML e CSS.</p>
 
+<div class="carousel-container">
 <div class="carousel">
 <button class="seta" onclick="event.stopPropagation();trocarImagemHTML(-1)">❮</button>
 <img id="img-html" src="img11.png">
 <button class="seta" onclick="event.stopPropagation();trocarImagemHTML(1)">❯</button>
+</div>
 </div>
 
 <a class="botao-github" href="https://github.com/FELIPEA03" target="_blank">
@@ -122,17 +115,13 @@ Ver GitHub
 </a>
 
 </div>
-
 </div>
 
 </div>
-
 </section>
 
 <section id="contato" class="contato">
-
 <h2>Contato</h2>
-
 <p>📱 WhatsApp: 11 91866-2998</p>
 
 <p>
@@ -141,7 +130,6 @@ Ver GitHub
 github.com/FELIPEA03
 </a>
 </p>
-
 </section>
 
 </div>
@@ -167,6 +155,36 @@ document.getElementById(id).src = imagens[i];
 
 const trocarImagemJS = criarCarousel(["img1.png","img2.png","img3.png"], "img-js");
 const trocarImagemHTML = criarCarousel(["img11.png","img22.png","img33.png"], "img-html");
+
+/* SWIPE MOBILE */
+function ativarSwipe(elementId, callback){
+
+let el = document.getElementById(elementId);
+let startX = 0;
+let endX = 0;
+
+el.addEventListener("touchstart", (e)=>{
+startX = e.touches[0].clientX;
+});
+
+el.addEventListener("touchend", (e)=>{
+endX = e.changedTouches[0].clientX;
+
+let diff = startX - endX;
+
+if(diff > 50){
+callback(1);
+}
+
+if(diff < -50){
+callback(-1);
+}
+
+});
+}
+
+ativarSwipe("img-js", trocarImagemJS);
+ativarSwipe("img-html", trocarImagemHTML);
 
 /* FUNDO ANIMADO */
 const canvas = document.getElementById("bg");
