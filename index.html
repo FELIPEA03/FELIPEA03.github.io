@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,9 +12,10 @@
 
 <body>
 
-<!-- FUNDO ANIMADO -->
+<!-- FUNDO -->
 <canvas id="bg"></canvas>
 
+<!-- MENU -->
 <nav class="menu">
 <a href="#perfil">Sobre</a>
 <a href="#skills">Skills</a>
@@ -24,6 +25,7 @@
 
 <div class="container">
 
+<!-- PERFIL -->
 <section id="perfil" class="perfil">
 
 <img src="foto.jpg" class="foto">
@@ -36,6 +38,7 @@ Desenvolvedor apaixonado por tecnologia, focado em criação de aplicações mod
 
 </section>
 
+<!-- SKILLS -->
 <section id="skills" class="skills">
 
 <h2>Minhas Skills</h2>
@@ -48,14 +51,18 @@ Desenvolvedor apaixonado por tecnologia, focado em criação de aplicações mod
 
 </section>
 
+<!-- PROJETOS -->
 <section id="projetos">
 
 <h2 class="titulo-projetos">Projetos</h2>
 
 <div class="grid-projetos">
 
+<!-- PYTHON -->
 <div id="projeto-python" class="card-projeto">
+
 <h3>📱 Gestor de Tarefas</h3>
+
 <p>Aplicativo desenvolvido com Python + Kivy.</p>
 
 <div class="video">
@@ -67,58 +74,72 @@ Desenvolvedor apaixonado por tecnologia, focado em criação de aplicações mod
 <a class="botao-github" href="https://github.com/FELIPEA03" target="_blank">
 Ver GitHub
 </a>
+
 </div>
 
+<!-- JAVASCRIPT -->
 <div id="projeto-js" class="card-projeto">
+
 <h3>💡 Abajur Interativo</h3>
+
 <p>Interface interativa com JavaScript.</p>
 
 <div class="carousel">
 <button class="seta" onclick="trocarImagemJS(-1)">❮</button>
-<img id="img-js" src="img1.png" alt="">
+<img id="img-js" src="img1.png">
 <button class="seta" onclick="trocarImagemJS(1)">❯</button>
 </div>
 
 <a class="botao-github" href="https://github.com/FELIPEA03" target="_blank">
 Ver GitHub
 </a>
+
 </div>
 
+<!-- HTML CSS -->
 <div id="projeto-htmlcss" class="card-projeto">
+
 <h3>⌚ Loja de Relógios</h3>
+
 <p>Site responsivo com HTML e CSS.</p>
 
 <div class="carousel">
 <button class="seta" onclick="trocarImagemHTML(-1)">❮</button>
-<img id="img-html" src="img11.png" alt="">
+<img id="img-html" src="img11.png">
 <button class="seta" onclick="trocarImagemHTML(1)">❯</button>
 </div>
 
 <a class="botao-github" href="https://github.com/FELIPEA03" target="_blank">
 Ver GitHub
 </a>
+
 </div>
 
 </div>
 
 </section>
 
+<!-- CONTATO -->
 <section id="contato" class="contato">
+
 <h2>Contato</h2>
+
 <p>📱 WhatsApp: 11 91866-2998</p>
+
 <p>
 💻 GitHub:
 <a href="https://github.com/FELIPEA03" target="_blank">
 github.com/FELIPEA03
 </a>
 </p>
+
 </section>
 
 </div>
 
 <script>
 
-/* CAROUSEL JS */
+/* CAROUSEL */
 function criarCarousel(imagens, id){
   let i = 0;
   return function(d){
@@ -132,66 +153,68 @@ function criarCarousel(imagens, id){
 const trocarImagemJS = criarCarousel(["img1.png","img2.png","img3.png"], "img-js");
 const trocarImagemHTML = criarCarousel(["img11.png","img22.png","img33.png"], "img-html");
 
-/* FUNDO ANIMADO */
+/* CANVAS */
 const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+function resizeCanvas(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+resizeCanvas();
 
 let particles = [];
 
-for(let i = 0; i < 80; i++){
-  particles.push({
-    x: Math.random()*canvas.width,
-    y: Math.random()*canvas.height,
-    size: Math.random()*2+1,
-    speedX: Math.random()*1-0.5,
-    speedY: Math.random()*1-0.5
-  });
+for(let i=0;i<80;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+size:Math.random()*2+1,
+speedX:Math.random()*1-0.5,
+speedY:Math.random()*1-0.5
+});
 }
 
 function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
 
-  particles.forEach(p=>{
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-    ctx.fillStyle="#58a6ff";
-    ctx.fill();
+ctx.clearRect(0,0,canvas.width,canvas.height);
 
-    p.x += p.speedX;
-    p.y += p.speedY;
+particles.forEach(p=>{
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+ctx.fillStyle="#58a6ff";
+ctx.fill();
 
-    if(p.x<0||p.x>canvas.width) p.speedX*=-1;
-    if(p.y<0||p.y>canvas.height) p.speedY*=-1;
-  });
+p.x+=p.speedX;
+p.y+=p.speedY;
 
-  for(let a=0;a<particles.length;a++){
-    for(let b=a;b<particles.length;b++){
-      let dx=particles[a].x-particles[b].x;
-      let dy=particles[a].y-particles[b].y;
-      let dist=dx*dx+dy*dy;
+if(p.x<0||p.x>canvas.width) p.speedX*=-1;
+if(p.y<0||p.y>canvas.height) p.speedY*=-1;
+});
 
-      if(dist<12000){
-        ctx.beginPath();
-        ctx.strokeStyle="rgba(88,166,255,0.2)";
-        ctx.moveTo(particles[a].x,particles[a].y);
-        ctx.lineTo(particles[b].x,particles[b].y);
-        ctx.stroke();
-      }
-    }
-  }
+for(let a=0;a<particles.length;a++){
+for(let b=a;b<particles.length;b++){
+let dx=particles[a].x-particles[b].x;
+let dy=particles[a].y-particles[b].y;
+let dist=dx*dx+dy*dy;
 
-  requestAnimationFrame(draw);
+if(dist<12000){
+ctx.beginPath();
+ctx.strokeStyle="rgba(88,166,255,0.2)";
+ctx.moveTo(particles[a].x,particles[a].y);
+ctx.lineTo(particles[b].x,particles[b].y);
+ctx.stroke();
+}
+}
+}
+
+requestAnimationFrame(draw);
 }
 
 draw();
 
-window.addEventListener("resize",()=>{
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
+window.addEventListener("resize", resizeCanvas);
 
 </script>
 
