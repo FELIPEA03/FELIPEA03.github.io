@@ -40,7 +40,6 @@ color:white;
 margin:0 15px;
 text-decoration:none;
 font-weight:bold;
-transition:0.3s;
 }
 
 .menu a:hover{
@@ -65,30 +64,9 @@ margin-bottom:60px;
 width:150px;
 border-radius:50%;
 border:3px solid #58a6ff;
-transition:0.3s;
-}
-
-.foto:hover{
-transform:scale(1.05);
-box-shadow:0 0 20px #58a6ff;
-}
-
-h1 span{
-color:#58a6ff;
-}
-
-.descricao{
-max-width:600px;
-margin:auto;
-margin-top:15px;
-color:#c9d1d9;
 }
 
 /* SKILLS */
-.skills{
-text-align:center;
-}
-
 .skill{
 background:#161b22;
 padding:10px 15px;
@@ -96,14 +74,8 @@ border-radius:8px;
 margin:5px;
 display:inline-block;
 border:1px solid #30363d;
-transition:0.3s;
-text-decoration:none;
 color:white;
-}
-
-.skill:hover{
-background:#238636;
-transform:scale(1.05);
+text-decoration:none;
 }
 
 /* GRID */
@@ -129,18 +101,14 @@ transform:translateY(-8px);
 box-shadow:0 0 20px rgba(88,166,255,0.2);
 }
 
-/* CONTEUDO OCULTO */
+/* CONTEUDO (AGORA CORRIGIDO) */
 .conteudo-projeto{
-max-height:0;
-overflow:hidden;
-opacity:0;
-transition:0.4s;
-margin-top:10px;
+display:none;
 }
 
 .conteudo-projeto.ativo{
-max-height:600px;
-opacity:1;
+display:block;
+margin-top:15px;
 }
 
 /* VIDEO */
@@ -172,19 +140,12 @@ border-radius:10px;
 }
 
 .seta{
-background:rgba(35,134,54,0.7);
+background:#238636;
 border:none;
 color:white;
-font-size:20px;
-padding:8px 12px;
+padding:10px;
 cursor:pointer;
 border-radius:50%;
-transition:0.3s;
-}
-
-.seta:hover{
-transform:scale(1.1);
-background:#2ea043;
 }
 
 /* BOTAO */
@@ -196,26 +157,10 @@ padding:10px 15px;
 color:white;
 text-decoration:none;
 border-radius:6px;
-font-weight:bold;
-transition:0.3s;
-}
-
-.botao-github:hover{
-background:#2ea043;
-transform:scale(1.05);
 }
 
 /* CONTATO */
 .contato{
 text-align:center;
 margin-top:80px;
-}
-
-.contato a{
-color:#58a6ff;
-text-decoration:none;
-}
-
-.contato a:hover{
-text-decoration:underline;
 }
