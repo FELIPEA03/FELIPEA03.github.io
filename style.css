@@ -101,7 +101,7 @@ transform:translateY(-8px);
 box-shadow:0 0 20px rgba(88,166,255,0.2);
 }
 
-/* CONTEUDO (AGORA CORRIGIDO) */
+/* CONTEUDO */
 .conteudo-projeto{
 display:none;
 }
@@ -125,6 +125,11 @@ border-radius:10px;
 }
 
 /* CAROUSEL */
+.carousel-container{
+overflow:hidden;
+touch-action:pan-y;
+}
+
 .carousel{
 display:flex;
 align-items:center;
@@ -137,6 +142,8 @@ margin:20px 0;
 max-width:300px;
 width:100%;
 border-radius:10px;
+user-select:none;
+pointer-events:none;
 }
 
 .seta{
