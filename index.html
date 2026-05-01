@@ -1,252 +1,54 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Felipe Andrade | Desenvolvedor</title>
-
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Rede Social</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+    <div class="container">
+        <nav class="sidebar">
+            <h2>RedeSocial</h2>
+            <ul>
+                <li><a href="#">🏠 Home</a></li>
+                <li><a href="#">🔍 Explorar</a></li>
+                <li><a href="#">🔔 Notificações</a></li>
+                <li><a href="#">👤 Perfil</a></li>
+            </ul>
+            <button class="btn-post">Postar</button>
+        </nav>
 
-<canvas id="bg"></canvas>
+        <main class="feed">
+            <header>Página Inicial</header>
+            
+            <div class="create-post">
+                <textarea placeholder="O que está acontecendo?"></textarea>
+                <button>Publicar</button>
+            </div>
 
-<nav class="menu">
-<a href="#perfil">Sobre</a>
-<a href="#skills">Skills</a>
-<a href="#projetos">Projetos</a>
-<a href="#contato">Contato</a>
-</nav>
+            <article class="post">
+                <div class="avatar"></div>
+                <div class="post-content">
+                    <p><strong>Dev Junior</strong> @dev_jr • 2h</p>
+                    <p>Estou começando a criar minha própria rede social com HTML e CSS! 🚀</p>
+                    <div class="post-actions">
+                        <span>💬 5</span>
+                        <span>❤️ 12</span>
+                        <span>🔄 3</span>
+                    </div>
+                </div>
+            </article>
+        </main>
 
-<div class="container">
-
-<!-- PERFIL -->
-<section id="perfil" class="perfil">
-<img src="foto.jpg" class="foto">
-
-<h1>Felipe <span>Andrade</span></h1>
-
-<p class="descricao">
-Desenvolvedor apaixonado por tecnologia, focado em criação de aplicações modernas, responsivas e interativas.
-</p>
-</section>
-
-<!-- SKILLS NOVAS -->
-<section id="skills" class="skills">
-
-<h2>Minhas Skills</h2>
-
-<div class="skills-grid">
-
-<a href="#projeto-python" class="skill-card">
-<h3>🐍 Python</h3>
-<p>Criação de aplicativos mobile com Kivy</p>
-<span>Ver projeto →</span>
-</a>
-
-<a href="#projeto-js" class="skill-card">
-<h3>⚡ JavaScript</h3>
-<p>Interatividade, animações e lógica</p>
-<span>Ver projeto →</span>
-</a>
-
-<a href="#projeto-htmlcss" class="skill-card">
-<h3>🎨 HTML & CSS</h3>
-<p>Sites modernos e responsivos</p>
-<span>Ver projeto →</span>
-</a>
-
-</div>
-
-</section>
-
-<!-- PROJETOS -->
-<section id="projetos">
-
-<h2 class="titulo-projetos">Projetos</h2>
-
-<div class="grid-projetos">
-
-<!-- PYTHON -->
-<div id="projeto-python" class="card-projeto" onclick="toggleProjeto('python')">
-<h3>📁 Gestor de Tarefas</h3>
-<p>Clique para ver detalhes</p>
-
-<div id="python" class="conteudo-projeto">
-
-<p>Aplicativo desenvolvido com Python + Kivy.</p>
-
-<div class="video">
-<video controls>
-<source src="video_app.mp4">
-</video>
-</div>
-
-<a class="botao-github" href="https://github.com/FELIPEA03" target="_blank">
-Ver GitHub
-</a>
-
-</div>
-</div>
-
-<!-- JS -->
-<div id="projeto-js" class="card-projeto" onclick="toggleProjeto('js')">
-<h3>📁 Abajur Interativo</h3>
-<p>Clique para ver detalhes</p>
-
-<div id="js" class="conteudo-projeto">
-
-<p>Interface interativa com JavaScript.</p>
-
-<div class="carousel-container">
-<div class="carousel">
-<button class="seta" onclick="event.stopPropagation();trocarImagemJS(-1)">❮</button>
-<img id="img-js" src="img1.png">
-<button class="seta" onclick="event.stopPropagation();trocarImagemJS(1)">❯</button>
-</div>
-</div>
-
-<a class="botao-github" href="https://github.com/FELIPEA03" target="_blank">
-Ver GitHub
-</a>
-
-</div>
-</div>
-
-<!-- HTML CSS -->
-<div id="projeto-htmlcss" class="card-projeto" onclick="toggleProjeto('html')">
-<h3>📁 Loja de Relógios</h3>
-<p>Clique para ver detalhes</p>
-
-<div id="html" class="conteudo-projeto">
-
-<p>Site responsivo com HTML e CSS.</p>
-
-<div class="carousel-container">
-<div class="carousel">
-<button class="seta" onclick="event.stopPropagation();trocarImagemHTML(-1)">❮</button>
-<img id="img-html" src="img11.png">
-<button class="seta" onclick="event.stopPropagation();trocarImagemHTML(1)">❯</button>
-</div>
-</div>
-
-<a class="botao-github" href="https://github.com/FELIPEA03" target="_blank">
-Ver GitHub
-</a>
-
-</div>
-</div>
-
-</div>
-</section>
-
-<!-- CONTATO -->
-<section id="contato" class="contato">
-<h2>Contato</h2>
-<p>📱 WhatsApp: 11 91866-2998</p>
-
-<p>
-💻 GitHub:
-<a href="https://github.com/FELIPEA03" target="_blank">
-github.com/FELIPEA03
-</a>
-</p>
-</section>
-
-</div>
-
-<script>
-
-/* ABRIR/FECHAR */
-function toggleProjeto(id){
-document.getElementById(id).classList.toggle("ativo");
-}
-
-/* CAROUSEL */
-function criarCarousel(imagens, id){
-let i = 0;
-return function(d){
-i += d;
-if(i < 0) i = imagens.length - 1;
-if(i >= imagens.length) i = 0;
-document.getElementById(id).src = imagens[i];
-}
-}
-
-const trocarImagemJS = criarCarousel(["img1.png","img2.png","img3.png"], "img-js");
-const trocarImagemHTML = criarCarousel(["img11.png","img22.png","img33.png"], "img-html");
-
-/* SWIPE */
-function ativarSwipe(id, callback){
-let el = document.getElementById(id);
-let startX = 0;
-
-el.addEventListener("touchstart", e=>{
-startX = e.touches[0].clientX;
-});
-
-el.addEventListener("touchend", e=>{
-let endX = e.changedTouches[0].clientX;
-let diff = startX - endX;
-
-if(diff > 50) callback(1);
-if(diff < -50) callback(-1);
-});
-}
-
-ativarSwipe("img-js", trocarImagemJS);
-ativarSwipe("img-html", trocarImagemHTML);
-
-/* FUNDO */
-const canvas = document.getElementById("bg");
-const ctx = canvas.getContext("2d");
-
-function resizeCanvas(){
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-}
-
-resizeCanvas();
-
-let particles = [];
-
-for(let i=0;i<80;i++){
-particles.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-size:Math.random()*2+1,
-speedX:Math.random()*1-0.5,
-speedY:Math.random()*1-0.5
-});
-}
-
-function draw(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
-
-particles.forEach(p=>{
-ctx.beginPath();
-ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-ctx.fillStyle="#58a6ff";
-ctx.fill();
-
-p.x+=p.speedX;
-p.y+=p.speedY;
-
-if(p.x<0||p.x>canvas.width) p.speedX*=-1;
-if(p.y<0||p.y>canvas.height) p.speedY*=-1;
-});
-
-requestAnimationFrame(draw);
-}
-
-draw();
-
-window.addEventListener("resize", resizeCanvas);
-
-</script>
-
+        <aside class="widgets">
+            <div class="widget-box">
+                <h3>O que está em alta</h3>
+                <p>#WebDesign</p>
+                <p>#Programação</p>
+                <p>#HTML5</p>
+            </div>
+        </aside>
+    </div>
 </body>
 </html>
