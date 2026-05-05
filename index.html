@@ -6,7 +6,6 @@
   <title>Felipe Andrade | Currículo</title>
 
   <link rel="stylesheet" href="style.css">
-
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
@@ -14,7 +13,7 @@
 
 <div class="container">
 
-  <!-- LADO ESQUERDO -->
+  <!-- ESQUERDA -->
   <div class="left">
 
     <div class="perfil">
@@ -47,9 +46,10 @@
 
   </div>
 
-  <!-- LADO DIREITO -->
+  <!-- DIREITA -->
   <div class="right">
 
+    <!-- EXPERIÊNCIA -->
     <section>
       <h2>Experiência</h2>
 
@@ -63,25 +63,90 @@
           <li>Versionamento de código com Git e GitHub</li>
         </ul>
       </div>
+    </section>
+
+    <!-- PROJETOS -->
+    <section>
+      <h2>Projetos</h2>
+
+      <!-- PYTHON -->
+      <div class="item">
+        <h4>📱 Gestor de Tarefas (Python)</h4>
+
+        <p>
+          Aplicativo desenvolvido com Python e Kivy para gerenciamento de tarefas,
+          focado em produtividade e organização pessoal.
+        </p>
+
+        <div class="video">
+          <video width="100%" controls>
+            <source src="video.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <a href="https://github.com/FELIPEA03" target="_blank">
+          🔗 Ver no GitHub
+        </a>
+      </div>
+
+      <!-- JS -->
+      <div class="item">
+        <h4>💡 Abajur Interativo (JavaScript)</h4>
+
+        <p>
+          Interface interativa com JavaScript permitindo manipulação dinâmica
+          de elementos visuais.
+        </p>
+
+        <div class="carousel">
+          <button onclick="trocarImagemJS(-1)">❮</button>
+          <img id="img-js" src="img1.png">
+          <button onclick="trocarImagemJS(1)">❯</button>
+        </div>
+
+        <a href="https://github.com/FELIPEA03" target="_blank">
+          🔗 Ver no GitHub
+        </a>
+      </div>
+
+      <!-- HTML CSS -->
+      <div class="item">
+        <h4>⌚ Loja de Relógios (HTML & CSS)</h4>
+
+        <p>
+          Site responsivo com foco em design moderno e experiência do usuário.
+        </p>
+
+        <div class="carousel">
+          <button onclick="trocarImagemHTML(-1)">❮</button>
+          <img id="img-html" src="img11.png">
+          <button onclick="trocarImagemHTML(1)">❯</button>
+        </div>
+
+        <a href="https://github.com/FELIPEA03" target="_blank">
+          🔗 Ver no GitHub
+        </a>
+      </div>
 
     </section>
 
+    <!-- HABILIDADES -->
     <section>
       <h2>Habilidades</h2>
 
       <ul>
         <li>HTML5, CSS3 e JavaScript</li>
-        <li>Python básico/intermediário</li>
+        <li>Python</li>
         <li>Git e GitHub</li>
-        <li>Design responsivo</li>
-        <li>Boas práticas de UI/UX</li>
+        <li>Design Responsivo</li>
       </ul>
-
     </section>
 
   </div>
 
 </div>
+
+<script src="script.js"></script>
 
 </body>
 </html>
