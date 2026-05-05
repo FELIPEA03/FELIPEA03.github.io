@@ -22,23 +22,8 @@ body{
 
 .perfil img{
   width:150px;
-  height:150px;
   border-radius:50%;
-  border:5px solid #4CAF50;
-}
-
-.perfil h2{
-  color:#4CAF50;
-  font-weight:400;
-}
-
-.secao{
-  margin-top:30px;
-  text-align:left;
-}
-
-.secao h3{
-  color:#4CAF50;
+  border:4px solid #4CAF50;
 }
 
 /* DIREITA */
@@ -48,16 +33,28 @@ body{
   color:#333;
 }
 
-.right h2{
+h2{
   border-bottom:2px solid #ccc;
 }
 
-.item{
-  margin-top:20px;
+/* PROJETOS */
+.projeto{
+  margin-top:15px;
+  border:1px solid #ddd;
+  border-radius:6px;
+  overflow:hidden;
 }
 
-ul{
-  padding-left:20px;
+.projeto-titulo{
+  background:#f5f5f5;
+  padding:12px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.projeto-conteudo{
+  display:none;
+  padding:15px;
 }
 
 /* CAROUSEL */
@@ -79,21 +76,4 @@ ul{
   color:white;
   padding:5px 10px;
   cursor:pointer;
-}
-
-/* VIDEO */
-.video{
-  margin-top:10px;
-}
-
-/* LINKS */
-.item a{
-  display:inline-block;
-  margin-top:8px;
-  color:#4CAF50;
-  text-decoration:none;
-}
-
-.item a:hover{
-  text-decoration:underline;
 }
