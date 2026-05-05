@@ -15,35 +15,22 @@
 
   <!-- ESQUERDA -->
   <div class="left">
-
     <div class="perfil">
       <img src="foto.jpg">
       <h1>Felipe Andrade</h1>
       <h2>Desenvolvedor Web</h2>
 
       <p>
-        Desenvolvedor focado em criação de interfaces modernas,
-        responsivas e funcionais, com experiência em projetos web.
+        Desenvolvedor focado em interfaces modernas, responsivas e funcionais.
       </p>
     </div>
 
     <div class="secao">
-      <h3>Educação</h3>
-      <p><strong>Curso/Faculdade</strong><br>2022 - 2025</p>
-    </div>
-
-    <div class="secao">
-      <h3>Línguas</h3>
-      <p>Português</p>
-      <p>Inglês (Intermediário)</p>
-    </div>
-
-    <div class="secao contato">
+      <h3>Contato</h3>
       <p>📱 11 91866-2998</p>
       <p>💻 github.com/FELIPEA03</p>
       <p>📍 São Paulo - SP</p>
     </div>
-
   </div>
 
   <!-- DIREITA -->
@@ -52,94 +39,78 @@
     <!-- EXPERIÊNCIA -->
     <section>
       <h2>Experiência</h2>
-
-      <div class="item">
-        <h4>Projetos Web</h4>
-        <span>2023 - Atual</span>
-
-        <ul>
-          <li>Desenvolvimento de sites responsivos com HTML, CSS e JavaScript</li>
-          <li>Criação de interfaces modernas focadas em usabilidade</li>
-          <li>Versionamento de código com Git e GitHub</li>
-        </ul>
-      </div>
+      <ul>
+        <li>Sites responsivos com HTML, CSS e JavaScript</li>
+        <li>Interfaces modernas focadas em UX</li>
+        <li>Uso de Git e GitHub</li>
+      </ul>
     </section>
 
     <!-- PROJETOS -->
     <section>
       <h2>Projetos</h2>
 
-      <!-- PYTHON -->
-      <div class="item">
-        <h4>📱 Gestor de Tarefas (Python)</h4>
+      <!-- PROJETO 1 -->
+      <div class="projeto">
+        <div class="projeto-titulo" onclick="toggleProjeto(this)">
+          📱 Gestor de Tarefas (Python + Kivy)
+        </div>
 
-        <p>
-          Aplicativo desenvolvido com Python e Kivy para gerenciamento de tarefas,
-          focado em produtividade e organização pessoal.
-        </p>
+        <div class="projeto-conteudo">
+          <p>Aplicativo para organização de tarefas.</p>
 
-        <div class="video">
           <video width="100%" controls>
             <source src="video_app.mp4" type="video/mp4">
           </video>
-        </div>
 
-        <a href="https://github.com/FELIPEA03" target="_blank">
-          🔗 Ver no GitHub
-        </a>
+          <a href="https://github.com/FELIPEA03" target="_blank">
+            Ver no GitHub
+          </a>
+        </div>
       </div>
 
-      <!-- JS -->
-      <div class="item">
-        <h4>💡 Abajur Interativo (JavaScript)</h4>
-
-        <p>
-          Interface interativa com JavaScript permitindo manipulação dinâmica
-          de elementos visuais.
-        </p>
-
-        <div class="carousel">
-          <button onclick="trocarImagemJS(-1)">❮</button>
-          <img id="img-js" src="img1.png">
-          <button onclick="trocarImagemJS(1)">❯</button>
+      <!-- PROJETO 2 -->
+      <div class="projeto">
+        <div class="projeto-titulo" onclick="toggleProjeto(this)">
+          💡 Abajur Interativo (JavaScript)
         </div>
 
-        <a href="https://github.com/FELIPEA03" target="_blank">
-          🔗 Ver no GitHub
-        </a>
+        <div class="projeto-conteudo">
+          <p>Interface interativa com JavaScript.</p>
+
+          <div class="carousel">
+            <button onclick="trocarImagemJS(-1)">❮</button>
+            <img id="img-js" src="img1.png">
+            <button onclick="trocarImagemJS(1)">❯</button>
+          </div>
+
+          <a href="https://github.com/FELIPEA03" target="_blank">
+            Ver no GitHub
+          </a>
+        </div>
       </div>
 
-      <!-- HTML CSS -->
-      <div class="item">
-        <h4>⌚ Loja de Relógios (HTML & CSS)</h4>
-
-        <p>
-          Site responsivo com foco em design moderno e experiência do usuário.
-        </p>
-
-        <div class="carousel">
-          <button onclick="trocarImagemHTML(-1)">❮</button>
-          <img id="img-html" src="img11.png">
-          <button onclick="trocarImagemHTML(1)">❯</button>
+      <!-- PROJETO 3 -->
+      <div class="projeto">
+        <div class="projeto-titulo" onclick="toggleProjeto(this)">
+          ⌚ Loja de Relógios (HTML & CSS)
         </div>
 
-        <a href="https://github.com/FELIPEA03" target="_blank">
-          🔗 Ver no GitHub
-        </a>
+        <div class="projeto-conteudo">
+          <p>Site responsivo moderno.</p>
+
+          <div class="carousel">
+            <button onclick="trocarImagemHTML(-1)">❮</button>
+            <img id="img-html" src="img11.png">
+            <button onclick="trocarImagemHTML(1)">❯</button>
+          </div>
+
+          <a href="https://github.com/FELIPEA03" target="_blank">
+            Ver no GitHub
+          </a>
+        </div>
       </div>
 
-    </section>
-
-    <!-- HABILIDADES -->
-    <section>
-      <h2>Habilidades</h2>
-
-      <ul>
-        <li>HTML5, CSS3 e JavaScript</li>
-        <li>Python</li>
-        <li>Git e GitHub</li>
-        <li>Design Responsivo</li>
-      </ul>
     </section>
 
   </div>
