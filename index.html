@@ -3,106 +3,91 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Felipe Andrade | Portfólio</title>
+  <title>Felipe Andrade | Desenvolvedor</title>
 
   <link rel="stylesheet" href="style.css">
 
-  <!-- Fonte moderna -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<canvas id="bg"></canvas>
+<div class="container">
 
-<!-- MENU -->
-<nav class="menu">
-  <a href="#hero">Início</a>
-  <a href="#sobre">Sobre</a>
-  <a href="#projetos">Projetos</a>
-  <a href="#contato">Contato</a>
-</nav>
-
-<!-- HERO -->
-<section id="hero" class="hero fade">
+<!-- HEADER -->
+<header>
   <h1>Felipe Andrade</h1>
-  <p>Desenvolvedor Front-End</p>
-  <a href="#projetos" class="btn">Ver Projetos</a>
-</section>
+  <p class="cargo">Desenvolvedor Front-End</p>
 
-<!-- SOBRE -->
-<section id="sobre" class="sobre fade">
-  <h2>Sobre mim</h2>
+  <div class="links">
+    <a href="https://github.com/FELIPEA03" target="_blank">GitHub</a>
+    <a href="#">LinkedIn</a>
+    <a href="#">WhatsApp</a>
+  </div>
+</header>
+
+<!-- RESUMO -->
+<section>
+  <h2>Resumo Profissional</h2>
   <p>
-    Desenvolvedor focado em criar interfaces modernas, responsivas e eficientes.
-    Experiência com HTML, CSS, JavaScript e Python.
+    Desenvolvedor focado em criação de interfaces modernas, responsivas e funcionais.
+    Experiência com HTML, CSS, JavaScript e Python, com ênfase em usabilidade e performance.
   </p>
 </section>
 
-<!-- PROJETOS -->
-<section id="projetos" class="fade">
-  <h2>Projetos</h2>
+<!-- SKILLS -->
+<section>
+  <h2>Skills Técnicas</h2>
 
-  <div class="grid-projetos">
-
-    <!-- PROJETO 1 -->
-    <div class="card-projeto">
-      <h3>📱 Gestor de Tarefas</h3>
-      <p>
-        Aplicativo desenvolvido com Python e Kivy focado em produtividade
-        e organização pessoal.
-      </p>
-      <a href="https://github.com/FELIPEA03" target="_blank" class="botao-github">
-        Ver GitHub
-      </a>
-    </div>
-
-    <!-- PROJETO 2 -->
-    <div class="card-projeto">
-      <h3>💡 Abajur Interativo</h3>
-
-      <div class="carousel">
-        <button onclick="trocarImagemJS(-1)">❮</button>
-        <img id="img-js" src="img1.png">
-        <button onclick="trocarImagemJS(1)">❯</button>
-      </div>
-
-      <a href="https://github.com/FELIPEA03" target="_blank" class="botao-github">
-        Ver GitHub
-      </a>
-    </div>
-
-    <!-- PROJETO 3 -->
-    <div class="card-projeto">
-      <h3>⌚ Loja de Relógios</h3>
-
-      <div class="carousel">
-        <button onclick="trocarImagemHTML(-1)">❮</button>
-        <img id="img-html" src="img11.png">
-        <button onclick="trocarImagemHTML(1)">❯</button>
-      </div>
-
-      <a href="https://github.com/FELIPEA03" target="_blank" class="botao-github">
-        Ver GitHub
-      </a>
-    </div>
-
+  <div class="skills">
+    <span>HTML</span>
+    <span>CSS</span>
+    <span>JavaScript</span>
+    <span>Python</span>
   </div>
 </section>
 
-<!-- CONTATO -->
-<section id="contato" class="contato fade">
-  <h2>Contato</h2>
-  <p>📱 WhatsApp: 11 91866-2998</p>
-  <p>
-    💻 GitHub:
-    <a href="https://github.com/FELIPEA03" target="_blank">
-      github.com/FELIPEA03
-    </a>
-  </p>
+<!-- PROJETOS -->
+<section>
+  <h2>Projetos</h2>
+
+  <div class="projeto">
+    <h3>Gestor de Tarefas (Python)</h3>
+    <p>
+      Aplicação desktop desenvolvida com Python e Kivy para gerenciamento de tarefas,
+      com foco em produtividade e organização pessoal.
+    </p>
+    <a href="https://github.com/FELIPEA03" target="_blank">Ver projeto</a>
+  </div>
+
+  <div class="projeto">
+    <h3>Abajur Interativo (JavaScript)</h3>
+    <p>
+      Interface interativa utilizando JavaScript puro para manipulação dinâmica
+      de elementos visuais.
+    </p>
+    <a href="https://github.com/FELIPEA03" target="_blank">Ver projeto</a>
+  </div>
+
+  <div class="projeto">
+    <h3>Loja de Relógios (HTML/CSS)</h3>
+    <p>
+      Site responsivo desenvolvido com HTML e CSS, com foco em design moderno
+      e experiência do usuário.
+    </p>
+    <a href="https://github.com/FELIPEA03" target="_blank">Ver projeto</a>
+  </div>
+
 </section>
 
-<script src="script.js"></script>
+<!-- CONTATO -->
+<section>
+  <h2>Contato</h2>
+  <p>Email: seuemail@email.com</p>
+  <p>WhatsApp: (11) 91866-2998</p>
+</section>
+
+</div>
 
 </body>
 </html>
