@@ -9,6 +9,9 @@ body{
   font-family:'Inter', sans-serif;
   background:#e4e4e4; /* fundo cinza profissional */
 }
+html, body{
+  height:100%;
+}
 
 /* CONTAINER (folha do currículo) */
 .container{
