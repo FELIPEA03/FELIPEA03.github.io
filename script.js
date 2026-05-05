@@ -1,6 +1,11 @@
-/* CAROUSEL */
+// ===============================
+// CAROUSEL
+// ===============================
 function criarCarousel(imagens, id){
   let i = 0;
+  const img = document.getElementById(id);
+
+  if(!img) return () => {};
 
   return function(d){
     i += d;
@@ -8,10 +13,11 @@ function criarCarousel(imagens, id){
     if(i < 0) i = imagens.length - 1;
     if(i >= imagens.length) i = 0;
 
-    document.getElementById(id).src = imagens[i];
+    img.src = imagens[i];
   }
 }
 
+// Instâncias dos carrosseis
 const trocarImagemJS = criarCarousel(
   ["img1.png","img2.png","img3.png"],
   "img-js"
@@ -22,60 +28,54 @@ const trocarImagemHTML = criarCarousel(
   "img-html"
 );
 
-/* ANIMAÇÃO SCROLL */
-const elements = document.querySelectorAll(".fade");
+// ===============================
+// SWIPE MOBILE (arrastar imagem)
+// ===============================
+function ativarSwipe(id, trocarFunc){
+  const img = document.getElementById(id);
+  if(!img) return;
 
-window.addEventListener("scroll", ()=>{
-  elements.forEach(el=>{
-    if(el.getBoundingClientRect().top < window.innerHeight){
-      el.classList.add("show");
+  let startX = 0;
+
+  img.addEventListener("touchstart", (e)=>{
+    startX = e.touches[0].clientX;
+  });
+
+  img.addEventListener("touchend", (e)=>{
+    let endX = e.changedTouches[0].clientX;
+    let diff = startX - endX;
+
+    if(diff > 50){
+      trocarFunc(1); // deslizou pra esquerda
+    }else if(diff < -50){
+      trocarFunc(-1); // deslizou pra direita
     }
   });
+}
+
+// Ativar swipe
+ativarSwipe("img-js", trocarImagemJS);
+ativarSwipe("img-html", trocarImagemHTML);
+
+// ===============================
+// AUTO PLAY (opcional)
+// ===============================
+// Descomenta se quiser trocar sozinho
+/*
+setInterval(() => {
+  trocarImagemJS(1);
+}, 3000);
+
+setInterval(() => {
+  trocarImagemHTML(1);
+}, 4000);
+*/
+
+// ===============================
+// SEGURANÇA (evita erro de imagem)
+// ===============================
+document.querySelectorAll("img").forEach(img => {
+  img.addEventListener("error", () => {
+    img.src = "https://via.placeholder.com/200x150?text=Imagem";
+  });
 });
-
-/* CANVAS */
-const canvas = document.getElementById("bg");
-const ctx = canvas.getContext("2d");
-
-function resizeCanvas(){
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-
-resizeCanvas();
-
-let particles = [];
-
-for(let i=0;i<80;i++){
-  particles.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    size:Math.random()*2+1,
-    speedX:Math.random()*1-0.5,
-    speedY:Math.random()*1-0.5
-  });
-}
-
-function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-
-  particles.forEach(p=>{
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-    ctx.fillStyle="#58a6ff";
-    ctx.fill();
-
-    p.x+=p.speedX;
-    p.y+=p.speedY;
-
-    if(p.x<0||p.x>canvas.width) p.speedX*=-1;
-    if(p.y<0||p.y>canvas.height) p.speedY*=-1;
-  });
-
-  requestAnimationFrame(draw);
-}
-
-draw();
-
-window.addEventListener("resize", resizeCanvas);
-
