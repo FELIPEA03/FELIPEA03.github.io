@@ -11,7 +11,7 @@ body{
   background:white;
 }
 
-/* LADO ESQUERDO */
+/* ESQUERDA */
 .left{
   width:35%;
   background:#0d0d0d;
@@ -27,14 +27,9 @@ body{
   border:5px solid #4CAF50;
 }
 
-.perfil h1{
-  margin:15px 0 5px;
-}
-
 .perfil h2{
   color:#4CAF50;
   font-weight:400;
-  margin-bottom:15px;
 }
 
 .secao{
@@ -46,13 +41,7 @@ body{
   color:#4CAF50;
 }
 
-/* CONTATO */
-.contato p{
-  font-size:14px;
-  margin:5px 0;
-}
-
-/* LADO DIREITO */
+/* DIREITA */
 .right{
   width:65%;
   padding:40px;
@@ -61,26 +50,50 @@ body{
 
 .right h2{
   border-bottom:2px solid #ccc;
-  padding-bottom:5px;
 }
 
 .item{
   margin-top:20px;
 }
 
-.item h4{
-  margin:0;
-}
-
-.item span{
-  font-size:14px;
-  color:#777;
-}
-
 ul{
   padding-left:20px;
 }
 
-li{
-  margin-bottom:8px;
+/* CAROUSEL */
+.carousel{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:10px;
+}
+
+.carousel img{
+  width:180px;
+  border-radius:6px;
+}
+
+.carousel button{
+  background:#4CAF50;
+  border:none;
+  color:white;
+  padding:5px 10px;
+  cursor:pointer;
+}
+
+/* VIDEO */
+.video{
+  margin-top:10px;
+}
+
+/* LINKS */
+.item a{
+  display:inline-block;
+  margin-top:8px;
+  color:#4CAF50;
+  text-decoration:none;
+}
+
+.item a:hover{
+  text-decoration:underline;
 }
