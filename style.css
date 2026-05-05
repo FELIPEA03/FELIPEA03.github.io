@@ -1,73 +1,86 @@
 body{
   margin:0;
   font-family:'Inter', sans-serif;
-  background:#0d1117;
-  color:#e6edf3;
+  background:#111;
 }
 
 .container{
-  max-width:800px;
+  display:flex;
+  max-width:1000px;
   margin:auto;
-  padding:40px 20px;
+  background:white;
 }
 
-/* HEADER */
-header{
-  border-bottom:1px solid #30363d;
-  margin-bottom:30px;
+/* LADO ESQUERDO */
+.left{
+  width:35%;
+  background:#0d0d0d;
+  color:white;
+  padding:30px;
+  text-align:center;
 }
 
-h1{
-  margin:0;
+.perfil img{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  border:5px solid #4CAF50;
 }
 
-.cargo{
-  color:#58a6ff;
+.perfil h1{
+  margin:15px 0 5px;
 }
 
-.links{
-  margin-top:10px;
+.perfil h2{
+  color:#4CAF50;
+  font-weight:400;
+  margin-bottom:15px;
 }
 
-.links a{
-  margin-right:15px;
-  color:#58a6ff;
-  text-decoration:none;
+.secao{
+  margin-top:30px;
+  text-align:left;
 }
 
-/* SEÇÕES */
-section{
-  margin-bottom:30px;
+.secao h3{
+  color:#4CAF50;
 }
 
-h2{
-  border-bottom:1px solid #30363d;
+/* CONTATO */
+.contato p{
+  font-size:14px;
+  margin:5px 0;
+}
+
+/* LADO DIREITO */
+.right{
+  width:65%;
+  padding:40px;
+  color:#333;
+}
+
+.right h2{
+  border-bottom:2px solid #ccc;
   padding-bottom:5px;
 }
 
-/* SKILLS */
-.skills{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
+.item{
+  margin-top:20px;
 }
 
-.skills span{
-  background:#161b22;
-  padding:6px 12px;
-  border-radius:5px;
-}
-
-/* PROJETOS */
-.projeto{
-  margin-bottom:20px;
-}
-
-.projeto h3{
+.item h4{
   margin:0;
 }
 
-.projeto a{
-  color:#58a6ff;
-  text-decoration:none;
+.item span{
+  font-size:14px;
+  color:#777;
+}
+
+ul{
+  padding-left:20px;
+}
+
+li{
+  margin-bottom:8px;
 }
