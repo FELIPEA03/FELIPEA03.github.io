@@ -1,155 +1,88 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Felipe Andrade | Portfólio</title>
 
-<title>Portfólio Felipe</title>
+  <link rel="stylesheet" href="style.css">
 
-<style>
-body{
-  margin:0;
-  font-family: Arial;
-  color:white;
-  background:#0d1117;
-}
-
-canvas{
-  position:fixed;
-  top:0;
-  left:0;
-  z-index:-1;
-}
-
-.menu{
-  display:flex;
-  justify-content:center;
-  gap:20px;
-  padding:15px;
-  background:#161b22;
-}
-
-.menu a{
-  color:#58a6ff;
-  text-decoration:none;
-}
-
-.container{
-  text-align:center;
-  padding:20px;
-}
-
-.foto{
-  width:120px;
-  border-radius:50%;
-}
-
-.grid-projetos{
-  display:flex;
-  flex-direction:column; /* vertical como você pediu */
-  gap:20px;
-}
-
-.card-projeto{
-  background:#161b22;
-  padding:15px;
-  border-radius:10px;
-}
-
-.carousel{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-}
-
-.carousel img{
-  width:200px;
-}
-
-.seta{
-  cursor:pointer;
-  background:none;
-  border:none;
-  font-size:20px;
-  color:white;
-}
-
-.botao-github{
-  display:inline-block;
-  margin-top:10px;
-  color:white;
-  background:#238636;
-  padding:8px 12px;
-  text-decoration:none;
-  border-radius:5px;
-}
-</style>
+  <!-- Fonte moderna -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
 <canvas id="bg"></canvas>
 
+<!-- MENU -->
 <nav class="menu">
-  <a href="#perfil">Sobre</a>
-  <a href="#skills">Skills</a>
+  <a href="#hero">Início</a>
+  <a href="#sobre">Sobre</a>
   <a href="#projetos">Projetos</a>
   <a href="#contato">Contato</a>
 </nav>
 
-<div class="container">
-
-<section id="perfil">
-  <img src="foto.jpg" class="foto">
-  <h1>Felipe <span>Andrade</span></h1>
+<!-- HERO -->
+<section id="hero" class="hero fade">
+  <h1>Felipe Andrade</h1>
+  <p>Desenvolvedor Front-End</p>
+  <a href="#projetos" class="btn">Ver Projetos</a>
 </section>
 
-<section id="skills">
-  <h2>Minhas Skills</h2>
-  <p>HTML, CSS, JavaScript, Python</p>
+<!-- SOBRE -->
+<section id="sobre" class="sobre fade">
+  <h2>Sobre mim</h2>
+  <p>
+    Desenvolvedor focado em criar interfaces modernas, responsivas e eficientes.
+    Experiência com HTML, CSS, JavaScript e Python.
+  </p>
 </section>
 
-<section id="projetos">
+<!-- PROJETOS -->
+<section id="projetos" class="fade">
   <h2>Projetos</h2>
 
   <div class="grid-projetos">
 
-    <!-- PYTHON -->
+    <!-- PROJETO 1 -->
     <div class="card-projeto">
       <h3>📱 Gestor de Tarefas</h3>
-      <p>Aplicativo com Python + Kivy</p>
-      <a class="botao-github" href="https://github.com/FELIPEA03" target="_blank">
+      <p>
+        Aplicativo desenvolvido com Python e Kivy focado em produtividade
+        e organização pessoal.
+      </p>
+      <a href="https://github.com/FELIPEA03" target="_blank" class="botao-github">
         Ver GitHub
       </a>
     </div>
 
-    <!-- JS -->
+    <!-- PROJETO 2 -->
     <div class="card-projeto">
       <h3>💡 Abajur Interativo</h3>
 
       <div class="carousel">
-        <button class="seta" onclick="trocarImagemJS(-1)">❮</button>
+        <button onclick="trocarImagemJS(-1)">❮</button>
         <img id="img-js" src="img1.png">
-        <button class="seta" onclick="trocarImagemJS(1)">❯</button>
+        <button onclick="trocarImagemJS(1)">❯</button>
       </div>
 
-      <a class="botao-github" href="https://github.com/FELIPEA03" target="_blank">
+      <a href="https://github.com/FELIPEA03" target="_blank" class="botao-github">
         Ver GitHub
       </a>
     </div>
 
-    <!-- HTML CSS -->
+    <!-- PROJETO 3 -->
     <div class="card-projeto">
       <h3>⌚ Loja de Relógios</h3>
 
       <div class="carousel">
-        <button class="seta" onclick="trocarImagemHTML(-1)">❮</button>
+        <button onclick="trocarImagemHTML(-1)">❮</button>
         <img id="img-html" src="img11.png">
-        <button class="seta" onclick="trocarImagemHTML(1)">❯</button>
+        <button onclick="trocarImagemHTML(1)">❯</button>
       </div>
 
-      <a class="botao-github" href="https://github.com/FELIPEA03" target="_blank">
+      <a href="https://github.com/FELIPEA03" target="_blank" class="botao-github">
         Ver GitHub
       </a>
     </div>
@@ -157,7 +90,8 @@ canvas{
   </div>
 </section>
 
-<section id="contato">
+<!-- CONTATO -->
+<section id="contato" class="contato fade">
   <h2>Contato</h2>
   <p>📱 WhatsApp: 11 91866-2998</p>
   <p>
@@ -168,81 +102,7 @@ canvas{
   </p>
 </section>
 
-</div>
-
-<script>
-
-/* CAROUSEL */
-function criarCarousel(imagens, id){
-  let i = 0;
-
-  return function(d){
-    i += d;
-
-    if(i < 0) i = imagens.length - 1;
-    if(i >= imagens.length) i = 0;
-
-    document.getElementById(id).src = imagens[i];
-  }
-}
-
-const trocarImagemJS = criarCarousel(
-  ["img1.png","img2.png","img3.png"],
-  "img-js"
-);
-
-const trocarImagemHTML = criarCarousel(
-  ["img11.png","img22.png","img33.png"],
-  "img-html"
-);
-
-/* CANVAS FUNDO */
-const canvas = document.getElementById("bg");
-const ctx = canvas.getContext("2d");
-
-function resizeCanvas(){
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-
-resizeCanvas();
-
-let particles = [];
-
-for(let i=0;i<80;i++){
-  particles.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    size:Math.random()*2+1,
-    speedX:Math.random()*1-0.5,
-    speedY:Math.random()*1-0.5
-  });
-}
-
-function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-
-  particles.forEach(p=>{
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-    ctx.fillStyle="#58a6ff";
-    ctx.fill();
-
-    p.x+=p.speedX;
-    p.y+=p.speedY;
-
-    if(p.x<0||p.x>canvas.width) p.speedX*=-1;
-    if(p.y<0||p.y>canvas.height) p.speedY*=-1;
-  });
-
-  requestAnimationFrame(draw);
-}
-
-draw();
-
-window.addEventListener("resize", resizeCanvas);
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
