@@ -19,6 +19,8 @@ body{
   box-shadow:0 0 20px rgba(0,0,0,0.2);
   border-radius:8px;
   overflow:hidden;
+
+  min-height:100vh; /* 🔥 ESSA LINHA RESOLVE O PROBLEMA */
 }
 
 /* ===================== */
