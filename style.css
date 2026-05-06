@@ -1,19 +1,11 @@
-/* RESET */
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box;}
 
-/* BODY */
 body{
   margin:0;
   font-family:'Inter', sans-serif;
-  background:#e4e4e4; /* fundo cinza profissional */
-}
-html, body{
-  height:100%;
+  background:#e4e4e4;
 }
 
-/* CONTAINER (folha do currículo) */
 .container{
   display:flex;
   max-width:1000px;
@@ -22,13 +14,10 @@ html, body{
   box-shadow:0 0 20px rgba(0,0,0,0.2);
   border-radius:8px;
   overflow:hidden;
-
-  min-height:100vh; /* 🔥 ESSA LINHA RESOLVE O PROBLEMA */
+  min-height:100vh;
 }
 
-/* ===================== */
-/* LADO ESQUERDO */
-/* ===================== */
+/* ESQUERDA */
 .left{
   width:35%;
   background:#0d0d0d;
@@ -39,86 +28,34 @@ html, body{
 
 .perfil img{
   width:140px;
-  height:140px;
   border-radius:50%;
   border:4px solid #4CAF50;
 }
 
-.perfil h1{
-  margin:15px 0 5px;
-  font-size:22px;
-}
-
-.perfil h2{
-  color:#4CAF50;
-  font-weight:400;
-  font-size:16px;
-}
-
-.left p{
-  font-size:14px;
-  line-height:1.5;
-}
-
-/* SEÇÕES ESQUERDA */
-.secao{
-  margin-top:25px;
-  text-align:left;
-}
-
-.secao h3{
-  color:#4CAF50;
-  margin-bottom:10px;
-}
-
-/* ===================== */
-/* LADO DIREITO */
-/* ===================== */
+/* DIREITA */
 .right{
   width:65%;
   padding:40px;
-  color:#333;
 }
 
-/* TITULOS */
 h2{
   border-bottom:2px solid #ccc;
-  padding-bottom:5px;
-  margin-top:0;
 }
 
-/* LISTAS */
-ul{
-  padding-left:20px;
-}
-
-li{
-  margin-bottom:8px;
-}
-
-/* ===================== */
-/* PROJETOS (ACCORDION) */
-/* ===================== */
+/* PROJETOS */
 .projeto{
   margin-top:15px;
   border:1px solid #ddd;
   border-radius:6px;
-  overflow:hidden;
 }
 
 .projeto-titulo{
-  background:#f5f5f5;
   padding:12px;
+  background:#f5f5f5;
   cursor:pointer;
   font-weight:600;
-  transition:0.2s;
 }
 
-.projeto-titulo:hover{
-  background:#eaeaea;
-}
-
-/* SETINHA */
 .projeto-titulo::after{
   content:"▼";
   float:right;
@@ -128,91 +65,110 @@ li{
   content:"▲";
 }
 
-/* CONTEÚDO */
 .projeto-conteudo{
   display:none;
   padding:15px;
-  background:#fff;
 }
 
-.projeto-conteudo p{
-  margin:10px 0;
-}
-
-/* LINK */
-.projeto-conteudo a{
-  display:inline-block;
-  margin-top:10px;
-  color:#4CAF50;
-  text-decoration:none;
-  font-weight:500;
-}
-
-.projeto-conteudo a:hover{
-  text-decoration:underline;
-}
-
-/* ===================== */
 /* CAROUSEL */
-/* ===================== */
 .carousel{
   display:flex;
   align-items:center;
   gap:10px;
-  margin-top:10px;
 }
 
 .carousel img{
   width:180px;
   border-radius:6px;
-  transition:0.3s;
 }
 
-.carousel img:hover{
-  transform:scale(1.05);
+/* TIMELINE */
+.timeline{
+  position:relative;
+  margin-top:30px;
 }
 
-/* BOTÕES */
-.carousel button{
+.timeline::after{
+  content:'';
+  position:absolute;
+  width:2px;
   background:#4CAF50;
-  border:none;
-  color:white;
-  padding:6px 10px;
-  cursor:pointer;
-  border-radius:4px;
-  transition:0.2s;
+  top:0;
+  bottom:0;
+  left:50%;
 }
 
-.carousel button:hover{
-  background:#3e8e41;
+.certificado{
+  position:relative;
+  width:50%;
+  padding:10px 30px;
 }
 
-/* ===================== */
-/* VIDEO */
-/* ===================== */
-video{
-  margin-top:10px;
+.certificado.esquerda{
+  left:0;
+  text-align:right;
+}
+
+.certificado.direita{
+  left:50%;
+}
+
+.conteudo{
+  background:#f9f9f9;
+  padding:10px;
+  border-radius:6px;
+  border:1px solid #ddd;
+}
+
+/* IMAGEM PADRÃO */
+.conteudo img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
   border-radius:6px;
 }
 
-/* ===================== */
+/* BOLINHA */
+.certificado::after{
+  content:'';
+  position:absolute;
+  width:12px;
+  height:12px;
+  background:#4CAF50;
+  border-radius:50%;
+  top:20px;
+}
+
+.certificado.esquerda::after{
+  right:-6px;
+}
+
+.certificado.direita::after{
+  left:-6px;
+}
+
 /* RESPONSIVO */
-/* ===================== */
 @media(max-width:768px){
 
   .container{
     flex-direction:column;
   }
 
-  .left, .right{
+  .left,.right{
     width:100%;
   }
 
-  .right{
-    padding:20px;
+  .timeline::after{
+    left:10px;
   }
 
-  .carousel img{
-    width:140px;
+  .certificado{
+    width:100%;
+    left:0;
+    text-align:left;
+  }
+
+  .certificado::after{
+    left:4px;
   }
 }
